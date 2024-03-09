@@ -1,4 +1,7 @@
+import { port, production, databaseUrl } from './environment.development';
+
 export const environment = {
-  production: process.env['production'] || false,
-  port: process.env['port'] || 4000,
+  production: process.env['production'] || production,
+  port: process.env['port'] || port,
+  databaseUrl: process.env['databaseUrl'] || databaseUrl,
 };

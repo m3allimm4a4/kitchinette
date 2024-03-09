@@ -1,10 +1,15 @@
 import express from 'express';
 import { environment } from './environments/environment';
+import * as mongoose from 'mongoose';
 
-const run = () => {
+const run = async () => {
   const server = express();
 
-  server.get('/api/test/', (_req, res) => {
+  await mongoose.connect(environment.databaseUrl);
+
+  server.use(express.json());
+
+  server.get<{}, { test: string }>('/api/test/', (req, res) => {
     res.status(200).json({ test: 'hello' });
   });
 
@@ -15,4 +20,6 @@ const run = () => {
   });
 };
 
-run();
+run()
+  .then()
+  .catch(error => console.error(error));
