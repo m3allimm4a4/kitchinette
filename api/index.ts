@@ -8,6 +8,7 @@ import { categoriesRoutes } from './routes/categoriesRoutes';
 import { brandsRoutes } from './routes/brandsRoutes';
 import { productsRoutes } from './routes/productsRoutes';
 import { ordersRoutes } from './routes/ordersRoutes';
+import { errorHandler } from './errors/error.handler';
 
 const run = async (): Promise<void> => {
   const server = express();
@@ -27,15 +28,17 @@ const run = async (): Promise<void> => {
 
   // Express Rest API
   server.use('/api/banners', bannersRoutes);
-  server.use('/api/slider', sliderRoutes);
+  // server.use('/api/slider', sliderRoutes);
   server.use('/api/categories', categoriesRoutes);
-  server.use('/api/brands', brandsRoutes);
-  server.use('/api/products', productsRoutes);
-  server.use('/api/orders', ordersRoutes);
+  // server.use('/api/brands', brandsRoutes);
+  // server.use('/api/products', productsRoutes);
+  // server.use('/api/orders', ordersRoutes);
 
   server.get('/api/**', (_, res) => {
     res.status(404).json({ message: `route doesn't exist` });
   });
+
+  server.use(errorHandler);
 
   server.listen(environment.port, () => {
     if (!environment.production) {
