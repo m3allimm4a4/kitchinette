@@ -1,81 +1,49 @@
-import { prisma } from 'api/models/prismaClient';
-import { PrismaFindAllQuery } from 'api/models/prismaFindAllQuery.interface';
-import { catchAsync } from 'api/shared/catchAsync';
-import { deleteImageFile, getImageName, saveUploadedFile } from 'api/shared/helpers';
-import { environment } from 'environment/environment';
-import { Request, Response } from 'express';
+import { RequestHandler } from 'express';
+import { catchAsync } from '../shared/catchAsync';
+import { Product } from '../models/product.model';
+import { InvalidIdError } from '../errors/invalid-id.error';
+import { NotFoundError } from '../errors/not-found.error';
 import { UploadedFile } from 'express-fileupload';
-import { join } from 'path';
+import { deleteImageFile, getImageName, saveUploadedFile } from '../shared/helpers';
+import { join } from 'node:path';
+import { environment } from '../environments/environment';
 
-export const getProducts = catchAsync(async (req: Request, res: Response): Promise<void> => {
-  const query: PrismaFindAllQuery = {};
+export const getProducts: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  let query = Product.find();
   if (req.query['category']) {
-    query.where = {
-      ...query.where,
-      categoryId: { equals: +req.query['category'] },
-    };
-  }
-  if (req.query['brand']) {
-    query.where = {
-      ...query.where,
-      brandId: { equals: +req.query['brand'] },
-    };
+    query = query.find({ category: { _id: req.query['category'] } });
   }
   if (req.query['search']) {
-    query.where = {
-      ...query.where,
-      name: { contains: req.query['search'] },
-    };
+    query = query.find({ name: { $text: { $search: req.query['search'] } } });
   }
   if (req.query['trending']) {
-    query.where = {
-      ...query.where,
-      trending: Boolean(+req.query['trending']),
-    };
+    query = query.find({ trending: req.query['trending'] });
   }
   if (req.query['newProducts']) {
-    query.orderBy = { createdDate: 'desc' };
-    query.take = 3;
+    query = query.sort({ createdAt: 'desc' }).limit(3);
   }
 
-  const products = await prisma.products.findMany({
-    include: {
-      category: { select: { id: true, name: true } },
-      brand: { select: { id: true, name: true } },
-    },
-    ...query,
-  });
+  const products = await query.populate('category');
   res.status(200).json(products);
 });
 
-export const getProduct = catchAsync(async (req: Request, res: Response): Promise<void> => {
-  const id = +req.params['id'];
-  if (!id) throw new Error('You must provide a product ID');
-  const product = await prisma.products.findFirstOrThrow({
-    include: {
-      category: { select: { id: true, name: true } },
-      brand: { select: { id: true, name: true } },
-    },
-    where: {
-      id: id,
-    },
-  });
+export const getProduct: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const id = req.params['id'];
+  if (!id) throw new InvalidIdError();
+  const product = await Product.findById(id).populate('category');
+  if (!product) throw new NotFoundError();
   res.status(200).json(product);
 });
 
-export const deleteProducts = catchAsync(async (req: Request, res: Response): Promise<void> => {
-  const id = +req.params['id'];
-  if (!id) throw new Error('You must provide a product ID');
+export const deleteProducts: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const id = req.params['id'];
+  if (!id) throw new InvalidIdError();
 
-  await prisma.products.delete({
-    where: {
-      id: id,
-    },
-  });
-  res.status(200).json(null);
+  await Product.findByIdAndDelete(id);
+  res.status(204).send();
 });
 
-export const createProduct = catchAsync(async (req: Request, res: Response): Promise<void> => {
+export const createProduct: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   if (!req.files) throw new Error('Images are missing images');
   if (Object.keys(req.files).length < 3) throw new Error('Some images are missing');
 
@@ -90,29 +58,18 @@ export const createProduct = catchAsync(async (req: Request, res: Response): Pro
   ]);
 
   try {
-    await prisma.products.create({
-      data: {
-        name: req.body.name,
-        price: +req.body.price,
-        oldPrice: +req.body.oldPrice,
-        mainImageUrl: join(environment.imagesLocation, mainImageName),
-        cardImageUrl: join(environment.imagesLocation, cardImageName),
-        cardHoverImageUrl: join(environment.imagesLocation, cardHoverImageName),
-        description: req.body.description,
-        trending: Boolean(req.body.trending),
-        category: {
-          connect: {
-            id: +req.body.categoryId,
-          },
-        },
-        brand: {
-          connect: {
-            id: +req.body.brandId,
-          },
-        },
-        createdDate: new Date(),
-      },
+    const newProduct = await Product.create({
+      name: req.body.name,
+      price: +req.body.price,
+      oldPrice: +req.body.oldPrice,
+      imagePath: join(environment.imagesPath, mainImageName),
+      mainImagePath: join(environment.imagesPath, cardImageName),
+      hoverImagePath: join(environment.imagesPath, cardHoverImageName),
+      description: req.body.description,
+      trending: Boolean(req.body.trending),
+      category: req.body.categoryId,
     });
+    res.status(200).json(newProduct);
   } catch (error) {
     await Promise.all([
       deleteImageFile(mainImageName),
@@ -121,25 +78,21 @@ export const createProduct = catchAsync(async (req: Request, res: Response): Pro
     ]);
     throw error;
   }
-  res.status(200).json(null);
 });
 
-export const updateProduct = catchAsync(async (req: Request, res: Response): Promise<void> => {
-  const id = +req.params['id'];
-  if (!id) throw new Error('You must provide a product ID');
+export const updateProduct: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const id = req.params['id'];
+  if (!id) throw new InvalidIdError();
   if (!req.files) throw new Error('Images are missing images');
   if (Object.keys(req.files).length < 3) throw new Error('Some images are missing');
 
-  const product = await prisma.products.findFirstOrThrow({
-    where: {
-      id: id,
-    },
-  });
+  const product = await Product.findById(id);
+  if (!product) throw new NotFoundError();
 
   await Promise.all([
-    deleteImageFile(getImageName(product.mainImageUrl)),
-    deleteImageFile(getImageName(product.cardImageUrl)),
-    deleteImageFile(getImageName(product.cardHoverImageUrl)),
+    deleteImageFile(getImageName(product.imagePath)),
+    deleteImageFile(getImageName(product.mainImagePath)),
+    deleteImageFile(getImageName(product.hoverImagePath)),
   ]);
 
   const mainImage = req.files['mainImage'] as UploadedFile;
@@ -153,31 +106,16 @@ export const updateProduct = catchAsync(async (req: Request, res: Response): Pro
   ]);
 
   try {
-    await prisma.products.update({
-      where: {
-        id: id,
-      },
-      data: {
-        name: req.body.name,
-        price: +req.body.price,
-        oldPrice: +req.body.oldPrice,
-        mainImageUrl: join(environment.imagesLocation, mainImageName),
-        cardImageUrl: join(environment.imagesLocation, cardImageName),
-        cardHoverImageUrl: join(environment.imagesLocation, cardHoverImageName),
-        description: req.body.description,
-        trending: Boolean(req.body.trending),
-        category: {
-          connect: {
-            id: +req.body.categoryId,
-          },
-        },
-        brand: {
-          connect: {
-            id: +req.body.brandId,
-          },
-        },
-      },
-    });
+    product.name = req.body.name;
+    product.price = +req.body.price;
+    product.imagePath = join(environment.imagesPath, mainImageName);
+    product.mainImagePath = join(environment.imagesPath, cardImageName);
+    product.hoverImagePath = join(environment.imagesPath, cardHoverImageName);
+    product.description = req.body.description;
+    product.trending = req.body.trending;
+    product.category = req.body.categoryId;
+    const oldProduct = await product.save();
+    res.status(200).json(oldProduct);
   } catch (error) {
     await Promise.all([
       deleteImageFile(mainImageName),
@@ -186,6 +124,4 @@ export const updateProduct = catchAsync(async (req: Request, res: Response): Pro
     ]);
     throw error;
   }
-
-  res.status(200).json(null);
 });
