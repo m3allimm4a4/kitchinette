@@ -28,7 +28,7 @@ const run = async (): Promise<void> => {
 
   // Express Rest API
   server.use('/api/banners', bannersRoutes);
-  // server.use('/api/slider', sliderRoutes);
+  server.use('/api/slider', sliderRoutes);
   server.use('/api/categories', categoriesRoutes);
   // server.use('/api/brands', brandsRoutes);
   // server.use('/api/products', productsRoutes);

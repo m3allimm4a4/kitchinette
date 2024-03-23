@@ -1,45 +1,37 @@
-import { catchAsync } from 'api/shared/catchAsync';
-import { prisma } from 'api/models/prismaClient';
-import * as express from 'express';
-import { deleteImageFile, getImageName, saveUploadedFile } from 'api/shared/helpers';
+import { RequestHandler } from 'express';
+import { catchAsync } from '../shared/catchAsync';
+import { Slider } from '../models/slider.model';
+import { InvalidIdError } from '../errors/invalid-id.error';
+import { deleteImageFile, getImageName, saveUploadedFile } from '../shared/helpers';
+import { NotFoundError } from '../errors/not-found.error';
 import { UploadedFile } from 'express-fileupload';
-import { environment } from 'environment/environment';
-import { join } from 'path';
+import { environment } from '../environments/environment';
+import { join } from 'node:path';
 
-export const getSlider = catchAsync(async (req: express.Request, res: express.Response): Promise<void> => {
-  const sliderItems = await prisma.slider.findMany();
-  res.status(200).json(sliderItems);
+export const getSlider: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const sliders = await Slider.find();
+  res.status(200).json(sliders);
 });
 
-export const updateSlider = catchAsync(async (req: express.Request, res: express.Response): Promise<void> => {
-  const id = +req.params['id'];
-  if (!id) throw new Error('Invalid ID');
+export const updateSlider: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const id = req.params['id'];
+  if (!id) throw new InvalidIdError();
   if (!req.files) throw new Error('Images are missing images');
   if (Object.keys(req.files).length < 1) throw new Error('Some images are missing');
 
-  const slider = await prisma.slider.findFirstOrThrow({
-    where: {
-      id: id,
-    },
-  });
+  const slider = await Slider.findById(id);
+  if (!slider) throw new NotFoundError();
 
-  await deleteImageFile(getImageName(slider.imageUrl));
+  await deleteImageFile(getImageName(slider.path));
 
   const image = req.files['imageFile'] as UploadedFile;
   const imageName = await saveUploadedFile(image);
   try {
-    const newSlider = await prisma.slider.update({
-      data: {
-        title: req.body.title,
-        subtitle: req.body.subtitle,
-        description: req.body.description,
-        url: req.body.url,
-        imageUrl: join(environment.imagesLocation, imageName),
-      },
-      where: {
-        id: id,
-      },
-    });
+    slider.title = req.body.title;
+    slider.subtitle = req.body.subtitle;
+    slider.description = req.body.description;
+    slider.path = join(environment.imagesPath, imageName);
+    const newSlider = await slider.save();
     res.status(200).json(newSlider);
   } catch (error) {
     await deleteImageFile(imageName);
