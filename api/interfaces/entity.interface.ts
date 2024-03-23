@@ -1,5 +1,5 @@
 export interface IEntity {
-  id: number;
-  createdDate: Date;
-  modifiedDate: Date;
+  _id: number;
+  createdAt: Date;
+  updatedAt: Date;
 }

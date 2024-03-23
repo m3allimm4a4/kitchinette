@@ -13,5 +13,4 @@ export interface IOrder extends IEntity {
 export interface IOrderProduct {
   product: IProduct;
   quantity: number;
-  unitPrice: number;
 }
