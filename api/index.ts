@@ -8,6 +8,7 @@ import { categoriesRoutes } from './routes/categoriesRoutes';
 import { productsRoutes } from './routes/productsRoutes';
 import { ordersRoutes } from './routes/ordersRoutes';
 import { errorHandler } from './errors/error.handler';
+import { NotFoundError } from './errors/not-found.error';
 
 const run = async (): Promise<void> => {
   const server = express();
@@ -30,10 +31,10 @@ const run = async (): Promise<void> => {
   server.use('/api/slider', sliderRoutes);
   server.use('/api/categories', categoriesRoutes);
   server.use('/api/products', productsRoutes);
-  // server.use('/api/orders', ordersRoutes);
+  server.use('/api/orders', ordersRoutes);
 
-  server.get('/api/**', (_, res) => {
-    res.status(404).json({ message: `route doesn't exist` });
+  server.get('/api/**', (_req, _res) => {
+    throw new NotFoundError();
   });
 
   server.use(errorHandler);
