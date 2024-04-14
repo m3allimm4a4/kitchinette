@@ -8,4 +8,10 @@ export interface IUser extends IEntity {
   city: string;
   address: string;
   password: string;
+  roles: UserRole[];
+}
+
+export enum UserRole {
+  NORMAL = 'NORMAL',
+  ADMIN = 'ADMIN',
 }

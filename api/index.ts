@@ -9,6 +9,9 @@ import { productsRoutes } from './routes/productsRoutes';
 import { ordersRoutes } from './routes/ordersRoutes';
 import { errorHandler } from './errors/error.handler';
 import { NotFoundError } from './errors/not-found.error';
+import { authRoutes } from './routes/authRoutes';
+import { auth } from './middlewares/auth.middleware';
+import { UserRole } from './interfaces/user.interface';
 
 const run = async (): Promise<void> => {
   const server = express();
@@ -31,7 +34,8 @@ const run = async (): Promise<void> => {
   server.use('/api/slider', sliderRoutes);
   server.use('/api/categories', categoriesRoutes);
   server.use('/api/products', productsRoutes);
-  server.use('/api/orders', ordersRoutes);
+  server.use('/api/orders', auth([UserRole.NORMAL]), ordersRoutes);
+  server.use('/api/auth', authRoutes);
 
   server.get('/api/**', (_req, _res) => {
     throw new NotFoundError();
