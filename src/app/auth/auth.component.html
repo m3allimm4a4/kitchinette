@@ -1,0 +1,39 @@
+<section id="contact-us" class="contact-us section">
+  <div class="container">
+    <div class="contact-head">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-main">
+            <div class="title">
+              <h3>Login</h3>
+            </div>
+            <form class="form">
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Username<span>*</span></label>
+                    <input name="username" type="text" [(ngModel)]="username" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Password<span>*</span></label>
+                    <input name="password" type="password" [(ngModel)]="password" />
+                  </div>
+                </div>
+                <div class="col-12" style="padding-top: 7px">
+                  <div class="form-group button">
+                    <button type="submit" class="btn" (click)="onLogin()">Login</button>
+                  </div>
+                  @if (showMessage) {
+                    <small>Invalid Credentials</small>
+                  }
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+<section class="hero-slider">
+  @for (item of sliderItems; track item.id) {
+    <div class="single-slider" [ngStyle]="{ backgroundImage: 'url(' + item.imageUrl + ')' }">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-9 col-12">
+            <div class="text-inner">
+              <div class="row">
+                <div class="col-lg-7 col-12">
+                  <div class="hero-text">
+                    <h1>
+                      <span> {{ item.title }} </span>{{ item.subtitle }}
+                    </h1>
+                    <p>
+                      {{ item.description }}
+                    </p>
+                    <div class="button">
+                      <a [routerLink]="item.url" class="btn">Shop Now!</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</section>

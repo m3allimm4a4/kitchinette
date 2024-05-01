@@ -1,0 +1,99 @@
+<section class="contact-us section">
+  <div class="container">
+    <div class="contact-head">
+      <div class="row">
+        @for (slider of sliderItems; track slider.id) {
+          <div class="col-12">
+            <div class="form-main">
+              <div class="title">
+                <h3>Slider Image {{ $index + 1 }}</h3>
+              </div>
+              <form class="form">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Title<span>*</span></label>
+                      <input name="title" type="text" [(ngModel)]="slider.title" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Subtitle<span>*</span></label>
+                      <input name="subtitle" type="text" [(ngModel)]="slider.subtitle" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Description<span>*</span></label>
+                      <input name="description" type="text" [(ngModel)]="slider.description" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Url<span>*</span></label>
+                      <input name="url" type="text" [(ngModel)]="slider.url" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>New Image<span>*</span></label>
+                      <input class="form-control" name="image" type="file" (change)="onFileChange($event, slider)" />
+                    </div>
+                  </div>
+                  <div class="col-12" style="padding-top: 7px">
+                    <div class="form-group button">
+                      <button type="submit" class="btn" (click)="onSliderUpdate(slider)">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        }
+
+        @for (banner of banners; track banner.id) {
+          <div class="col-12" style="padding-top: 20px">
+            <div class="form-main">
+              <div class="title">
+                <h3>Banner {{ $index + 1 }}</h3>
+              </div>
+              <form class="form">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Title<span>*</span></label>
+                      <input name="title" type="text" [(ngModel)]="banner.title" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Subtitle<span>*</span></label>
+                      <input name="subtitle" type="text" [(ngModel)]="banner.subtitle" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>Url<span>*</span></label>
+                      <input name="url" type="text" [(ngModel)]="banner.url" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label>New Image<span>*</span></label>
+                      <input class="form-control" name="image" type="file" (change)="onFileChange($event, banner)" />
+                    </div>
+                  </div>
+                  <div class="col-12" style="padding-top: 7px">
+                    <div class="form-group button">
+                      <button type="submit" class="btn" (click)="onBannerUpdate(banner)">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

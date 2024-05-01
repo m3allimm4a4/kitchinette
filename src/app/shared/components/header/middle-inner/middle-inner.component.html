@@ -1,0 +1,92 @@
+<div class="middle-inner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-2 col-12">
+        <div class="logo">
+          <a routerLink="/"><img ngSrc="/assets/logo.png" width="60" alt="LOGO" height="60" /></a>
+        </div>
+
+        <div class="search-top">
+          <div class="search-top">
+            <form class="search-form">
+              <input type="text" placeholder="Search here..." name="search" [(ngModel)]="searchString" />
+              <button value="search" type="submit" (click)="search()">
+                <i class="pi pi-search"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="mobile-navv">
+          <div class="slicknav_menu">
+            <a class="slicknav_btn" (click)="navbarCollapsed = !navbarCollapsed">
+              <span class="slicknav_menutxt"></span>
+              <span class="slicknav_icon slicknav_no-text">
+                <span class="slicknav_icon-bar"></span>
+                <span class="slicknav_icon-bar"></span>
+                <span class="slicknav_icon-bar"></span>
+              </span>
+            </a>
+
+            <ul class="slicknav_nav" [ngbCollapse]="navbarCollapsed">
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a routerLink="/">Home</a>
+              </li>
+              <li routerLinkActive="active">
+                <a [routerLink]="[]" (click)="onCategoriesClick()">
+                  Categories
+                  <i class="pi" [ngClass]="categoriesAngle"></i>
+                </a>
+                <ul class="dropdown">
+                  <div [ngbCollapse]="categoriesCollapsed">
+                    <li *ngFor="let item of categories">
+                      <a routerLink="/product-list" [queryParams]="{ category: item.id }">
+                        {{ item.name }}
+                      </a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/cart">View Cart</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/contact-us">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-7 col-12">
+        <div class="search-bar-top">
+          <div class="search-bar">
+            <form>
+              <input name="search" placeholder="Search Products Here....." type="search" [(ngModel)]="searchString" />
+              <button class="btnn" (click)="search()">
+                <i class="pi pi-search"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-12">
+        <div class="right-bar">
+          <div class="sinlge-bar">
+            <a routerLink="/login" class="single-icon">
+              <i class="pi pi-user"></i>
+            </a>
+          </div>
+
+          <div class="sinlge-bar shopping">
+            <a [routerLink]="[]" class="single-icon">
+              <i class="pi pi-shopping-cart"></i>
+              <span class="total-count">{{ cartItemCount }}</span>
+            </a>
+
+            <app-header-shopping-list (cartItemsCountChange)="cartItemCount = $event"></app-header-shopping-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

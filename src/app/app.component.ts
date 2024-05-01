@@ -1,22 +1,23 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  title = 'kitchinette';
+export class AppComponent {
+  public area = 'user';
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.http.get('http://localhost/4000/api/test').subscribe(res => {
-      console.log(res);
-    });
+  onActivate(component: Component) {
+    // if (component instanceof AdminDashboardComponent) {
+    //   this.area = 'admin';
+    // } else {
+    // }
+    this.area = 'user';
   }
 }

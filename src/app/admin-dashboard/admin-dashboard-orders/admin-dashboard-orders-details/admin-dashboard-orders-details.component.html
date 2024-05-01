@@ -1,0 +1,132 @@
+<section class="shop checkout section">
+  <div class="container">
+    <form class="form">
+      <div class="row">
+        <div class="col-lg-8 col-12">
+          <div class="checkout-form">
+            <h2>Order #{{ order.id }}</h2>
+            <p></p>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>First Name<span>*</span></label>
+                  <input type="text" [value]="order.firstName" disabled />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Last Name<span>*</span></label>
+                  <input type="text" [value]="order.lastName" disabled />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Email Address<span>*</span></label>
+                  <input type="email" [value]="order.email" disabled />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Phone Number<span>*</span></label>
+                  <input type="text" [value]="order.phone" disabled />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>City<span>*</span></label>
+                  <input type="text" [value]="order.city" disabled />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Address Line 1<span>*</span></label>
+                  <input type="text" [value]="order.address1" disabled />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Address Line 2<span>*</span></label>
+                  <input type="text" [value]="order.address2" disabled />
+                </div>
+              </div>
+              <div class="col-12">
+                <p>Items</p>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  @if (order.items?.length) {
+                    <tbody>
+                      @for (item of order.items; track item) {
+                        <tr>
+                          <th scope="row">{{ $index + 1 }}</th>
+                          <td>{{ item.product.name }}</td>
+                          <td>{{ item.quantity }}</td>
+                          <td>{{ item.product.price * item.quantity }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  }
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-12">
+          <div class="order-details">
+            <div class="single-widget">
+              <h2>CART TOTALS</h2>
+              <div class="content">
+                <ul>
+                  <li>
+                    Sub Total<span>${{ order.subtotal }}</span>
+                  </li>
+                  <li>
+                    (-) Shipping<span>${{ shipping }}</span>
+                  </li>
+                  <li class="last">
+                    Total<span>${{ order.subtotal + shipping }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="single-widget">
+              <h2>Payments</h2>
+              <div class="content">
+                <div class="checkbox">
+                  <label class="checkbox-inline checked" for="2">
+                    <input name="news" id="2" type="radio" checked /> Cash On Delivery
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="single-widget get-button">
+              <div class="content">
+                <div class="button">
+                  <button
+                    class="btn btn-secondary animate"
+                    type="submit"
+                    [disabled]="!checkoutForm.valid || checkoutDisabled">
+                    <div
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      *ngIf="checkoutLoading; else checkoutButton"></div>
+                    <ng-template #checkoutButton>Proceed To Checkout</ng-template>
+                  </button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

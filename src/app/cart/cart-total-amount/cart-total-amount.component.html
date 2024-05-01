@@ -1,0 +1,28 @@
+<div class="total-amount">
+  <div class="row">
+    <div class="col-lg-8 col-md-5 col-12">
+      <div class="left">
+        <div class="coupon"></div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-7 col-12">
+      <div class="right">
+        <ul>
+          <li>
+            Cart Subtotal<span>${{ subtotal }}</span>
+          </li>
+          <li>
+            Shipping<span>{{ shipping ? '$' + shipping : 'Free' }}</span>
+          </li>
+          <li class="last">
+            You Pay<span>${{ subtotal + shipping }}</span>
+          </li>
+        </ul>
+        <div class="button5">
+          <a routerLink="/checkout" class="btn">Checkout</a>
+          <a routerLink="/product-list" class="btn">Continue shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.id) {
+        <tr>
+          <th scope="row">{{ product.id }}</th>
+          <td>{{ product.name }}</td>
+          <td>{{ product.createdDate | date }}</td>
+          <td>
+            <a [routerLink]="[product.id]" [relativeTo]="activatedRoute">
+              <i class="pi pi-pencil"></i>
+            </a>
+            <a [routerLink]="[]" (click)="deleteProduct(product)">
+              <i class="pi pi-trash"></i>
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <button class="btn" [routerLink]="[0]" [relativeTo]="activatedRoute">Add</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

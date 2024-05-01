@@ -1,0 +1,31 @@
+<div class="shopping-item">
+  <div class="dropdown-cart-header">
+    <span>{{ cartItems.length }}</span>
+    <a routerLink="/cart">View Cart</a>
+  </div>
+  <ul class="shopping-list">
+    <li *ngFor="let item of cartItems">
+      <a class="remove" title="Remove this item" (click)="removeItemFromCart(item)">
+        <i class="pi pi-minus"></i>
+      </a>
+      <a class="cart-img" [routerLink]="['product-details', item.product.id]">
+        <img [src]="item.product.cardImageUrl" [alt]="item.product.name" />
+      </a>
+      <h4>
+        <a [routerLink]="['product-details', item.product.id]">
+          {{ item.product.name }}
+        </a>
+      </h4>
+      <p class="quantity">
+        {{ item.quantity }}x - <span class="amount">${{ item.product.price }}</span>
+      </p>
+    </li>
+  </ul>
+  <div class="bottom">
+    <div class="total">
+      <span>Total</span>
+      <span class="total-amount">${{ totalAmount }}</span>
+    </div>
+    <a routerLink="/checkout" class="btn animate">Checkout</a>
+  </div>
+</div>

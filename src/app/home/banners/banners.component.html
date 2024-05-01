@@ -1,0 +1,18 @@
+<section class="small-banner section">
+  <div class="container-fluid">
+    <div class="row">
+      @for (banner of banners; track banner.id) {
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="single-banner">
+            <img [src]="banner.imageUrl" [alt]="banner.title" />
+            <div class="content">
+              <p>{{ banner.title }}</p>
+              <h3>{{ banner.subtitle }}</h3>
+              <a [routerLink]="banner.url">Shop Now</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

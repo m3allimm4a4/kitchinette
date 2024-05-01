@@ -1,0 +1,37 @@
+<div class="main-sidebar">
+  <div class="single-widget category">
+    <h3 class="title">Categories</h3>
+    <ul class="categor-list">
+      @for (category of categories; track category.id) {
+        <li>
+          <a routerLink="/product-list" [queryParams]="{ category: category.id }">
+            {{ category.name }}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="single-widget recent-post">
+    <h3 class="title">New Products</h3>
+
+    @for (product of newProducts; track product.id) {
+      <div class="single-post">
+        <div class="image">
+          <img [src]="product.cardImageUrl" [alt]="product.name" />
+        </div>
+        <div class="content">
+          <h5>
+            <a [routerLink]="['/product-details', product.id]">{{ product.name }}</a>
+          </h5>
+          <ul class="comment">
+            <li>
+              <i class="pi pi-calendar"> </i>
+              {{ product.createdDate | date }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    }
+  </div>
+</div>

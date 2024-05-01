@@ -1,0 +1,25 @@
+<div class="single-product">
+  <div class="product-img">
+    <a [routerLink]="['/product-details', product.id]">
+      <img class="default-img" [src]="product.cardImageUrl" [alt]="product.name" />
+      <img class="hover-img" [src]="product.cardHoverImageUrl" [alt]="product.name" />
+      <!-- <span class="new">New</span> -->
+    </a>
+    <div class="button-head">
+      <div class="product-action-2">
+        <a title="Add to cart" (click)="addToCart()">Add to cart</a>
+      </div>
+    </div>
+  </div>
+  <div class="product-content">
+    <h3>
+      <a [routerLink]="['/product-details', product.id]">{{ product.name }}</a>
+    </h3>
+    <div class="product-price">
+      @if (product.oldPrice) {
+        <span class="old"> ${{ product.oldPrice }} </span>
+      }
+      <span> ${{ product.price }} </span>
+    </div>
+  </div>
+</div>
