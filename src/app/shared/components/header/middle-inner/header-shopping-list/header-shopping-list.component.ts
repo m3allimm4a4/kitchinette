@@ -3,14 +3,14 @@ import { Subscription } from 'rxjs';
 import { CartItem } from '../../../../models/cart-item.interface';
 import { CartService } from '../../../../../cart/cart.service';
 import { RouterLink } from '@angular/router';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-header-shopping-list',
   templateUrl: './header-shopping-list.component.html',
   styleUrls: ['./header-shopping-list.component.scss'],
   standalone: true,
-  imports: [RouterLink, NgForOf],
+  imports: [RouterLink, NgForOf, NgOptimizedImage],
 })
 export class HeaderShoppingListComponent implements OnInit, OnDestroy {
   @Output() cartItemsCountChange = new EventEmitter<number>();

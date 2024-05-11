@@ -13,12 +13,12 @@
         <div class="product-info">
           <div class="nav-main">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-              @for (category of categories; track category.id) {
+              @for (category of categories; track category._id) {
                 <li class="nav-item">
                   <a
                     routerLink="/"
                     class="nav-link"
-                    [ngClass]="{ active: activeCategory.id === category.id }"
+                    [ngClass]="{ active: activeCategory._id === category._id }"
                     (click)="switchCategory(category)"
                     >{{ category.name }}</a
                   >
@@ -31,7 +31,7 @@
             <div class="tab-pane" [ngClass]="{ show: showTab, active: showTab, fade: !showTab }">
               <div class="tab-single">
                 <div class="row">
-                  @for (product of filteredTrendingItems; track product.id) {
+                  @for (product of filteredTrendingItems; track product._id) {
                     <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                       <app-product-card [product]="product"></app-product-card>
                     </div>

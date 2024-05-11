@@ -15,11 +15,11 @@
     @for (item of cartItems; track item) {
       <tr>
         <td class="image" data-title="No">
-          <img [src]="item.product.cardImageUrl" [alt]="item.product.name" />
+          <img [ngSrc]="item.product.imagePath" [alt]="item.product.name" fill />
         </td>
         <td class="product-des" data-title="Description">
           <p class="product-name">
-            <a [routerLink]="['product-details', item.product.id]">
+            <a [routerLink]="['product-details', item.product._id]">
               {{ item.product.name }}
             </a>
           </p>

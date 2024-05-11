@@ -26,7 +26,7 @@ export class TrendingItemsComponent implements OnInit {
   ngOnInit(): void {
     this.homeService.getTrendingItems().subscribe(trendingItems => {
       trendingItems.forEach(item => {
-        const category = this.categories.find(c => c.id === item.category.id);
+        const category = this.categories.find(c => c._id === item.category._id);
         if (!category) {
           this.categories.push(item.category);
         }
@@ -44,7 +44,7 @@ export class TrendingItemsComponent implements OnInit {
 
   private filterTrendingItems() {
     this.showTab = false;
-    this.filteredTrendingItems = this.trendingItems.filter(item => item.category.id === this.activeCategory.id);
+    this.filteredTrendingItems = this.trendingItems.filter(item => item.category._id === this.activeCategory._id);
     this.showTab = true;
   }
 }

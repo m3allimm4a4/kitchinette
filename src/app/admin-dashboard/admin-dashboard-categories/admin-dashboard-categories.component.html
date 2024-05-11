@@ -7,12 +7,12 @@
       </tr>
     </thead>
     <tbody>
-      @for (category of categories; track category.id) {
+      @for (category of categories; track category._id) {
         <tr>
-          <th scope="row">{{ category.id }}</th>
+          <th scope="row">{{ category._id }}</th>
           <td>{{ category.name }}</td>
           <td>
-            <a [routerLink]="[category.id]" [relativeTo]="activatedRoute">
+            <a [routerLink]="[category._id]" [relativeTo]="activatedRoute">
               <i class="pi pi-pencil"></i>
             </a>
             <a [routerLink]="[]" (click)="deleteCategory(category)">

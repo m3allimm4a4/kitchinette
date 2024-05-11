@@ -1,33 +1,16 @@
-import { CartItem } from './cart-item.interface';
+import { Entity } from './entity.interface';
+import { User } from './user.interface';
+import { Product } from './product.interface';
 
-export interface Order {
-  id?: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  city: string;
-  address1: string;
-  address2: string;
+export interface Order extends Entity {
+  user: User;
   subtotal: number;
-  discount: number;
   total: number;
-  createdDate: Date;
-  items?: CartItem[];
+  discount: number;
+  products: OrderProduct[];
 }
 
-export interface OrderResponse {
-  id?: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  city: string;
-  address1: string;
-  address2: string;
-  subtotal: number;
-  discount: number;
-  total: number;
-  createdDate: number;
-  items?: CartItem[];
+export interface OrderProduct {
+  product: Product;
+  quantity: number;
 }

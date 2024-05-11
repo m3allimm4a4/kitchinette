@@ -2,9 +2,9 @@
   <div class="single-widget category">
     <h3 class="title">Categories</h3>
     <ul class="categor-list">
-      @for (cat of categories; track cat.id) {
+      @for (cat of categories; track cat._id) {
         <li>
-          <a [routerLink]="[]" [queryParams]="{ category: cat.id }" queryParamsHandling="merge">{{ cat.name }} </a>
+          <a [routerLink]="[]" [queryParams]="{ category: cat._id }" queryParamsHandling="merge">{{ cat.name }} </a>
         </li>
       }
     </ul>
@@ -13,9 +13,9 @@
   <div class="single-widget category">
     <h3 class="title">Brands</h3>
     <ul class="categor-list">
-      @for (brand of brands; track brand.id) {
+      @for (brand of brands; track brand._id) {
         <li>
-          <a [routerLink]="[]" [queryParams]="{ brand: brand.id }" queryParamsHandling="merge">
+          <a [routerLink]="[]" [queryParams]="{ brand: brand._id }" queryParamsHandling="merge">
             {{ brand.name }}
           </a>
         </li>

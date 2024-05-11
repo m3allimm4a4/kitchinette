@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SliderItem } from '../../shared/models/slider.interface';
+import { Slider } from '../../shared/models/slider.interface';
 import { Banner } from '../../shared/models/banner.interface';
 import { HomeService } from '../../home/home.service';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
 })
 export class AdminDashboardHomeComponent implements OnInit {
-  public sliderItems: SliderItem[] = [];
+  public sliderItems: Slider[] = [];
   public banners: Banner[] = [];
 
   constructor(private homeService: HomeService) {}
@@ -22,8 +22,8 @@ export class AdminDashboardHomeComponent implements OnInit {
     this.refreshBanners();
   }
 
-  onSliderUpdate(slider: SliderItem): void {
-    if (slider.title && slider.subtitle && slider.description && slider.url && slider.imageFile) {
+  onSliderUpdate(slider: Slider): void {
+    if (slider.title && slider.subtitle && slider.description && slider.link && slider.imageFile) {
       this.homeService.updateSlider(slider).subscribe(() => {
         this.refreshSlider();
       });
@@ -31,14 +31,14 @@ export class AdminDashboardHomeComponent implements OnInit {
   }
 
   onBannerUpdate(banner: Banner): void {
-    if (banner.title && banner.subtitle && banner.url && banner.imageFile) {
+    if (banner.title && banner.subtitle && banner.link && banner.imageFile) {
       this.homeService.updateBanner(banner).subscribe(() => {
         this.refreshBanners();
       });
     }
   }
 
-  public onFileChange(event: Event, item: Banner | SliderItem): void {
+  public onFileChange(event: Event, item: Banner | Slider): void {
     const fileList = (event.target as HTMLInputElement).files;
     if (fileList && fileList.length > 0) {
       item.imageFile = fileList[0];

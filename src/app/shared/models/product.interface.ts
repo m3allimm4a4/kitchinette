@@ -1,32 +1,16 @@
-import { Brand } from './brand.interface';
 import { Category } from './category.interface';
+import { Entity } from './entity.interface';
 
-export interface Product {
-  id: number;
+export interface Product extends Entity {
   name: string;
-  cardImageUrl?: string;
-  cardHoverImageUrl?: string;
-  mainImageUrl?: string;
   price: number;
-  oldPrice?: number;
-  category: Category;
-  brand: Brand;
-  createdDate?: Date;
-  description?: string;
-}
-
-export interface ProductResponse {
-  id: number;
-  name: string;
-  cardImageUrl: string;
-  cardHoverImageUrl: string;
-  mainImageUrl: string;
-  price: number;
-  oldPrice: number;
-  category: Category;
-  brand: Brand;
-  createdDate: string;
+  imagePath: string;
+  hoverImagePath: string;
+  mainImagePath: string;
   description: string;
+  trending: boolean;
+  category: Category;
+  oldPrice?: number;
 }
 
 export interface ProductCreate {
@@ -37,8 +21,7 @@ export interface ProductCreate {
   mainImage: File;
   cardImage: File;
   cardHoverImage: File;
-  createdDate: number;
   trending: boolean;
-  categoryId: number;
+  category: Category;
   brandId: number;
 }

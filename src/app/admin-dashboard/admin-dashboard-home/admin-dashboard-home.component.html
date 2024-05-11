@@ -2,7 +2,7 @@
   <div class="container">
     <div class="contact-head">
       <div class="row">
-        @for (slider of sliderItems; track slider.id) {
+        @for (slider of sliderItems; track slider._id) {
           <div class="col-12">
             <div class="form-main">
               <div class="title">
@@ -30,8 +30,8 @@
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label>Url<span>*</span></label>
-                      <input name="url" type="text" [(ngModel)]="slider.url" />
+                      <label>Link<span>*</span></label>
+                      <input name="url" type="text" [(ngModel)]="slider.link" />
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
@@ -51,7 +51,7 @@
           </div>
         }
 
-        @for (banner of banners; track banner.id) {
+        @for (banner of banners; track banner._id) {
           <div class="col-12" style="padding-top: 20px">
             <div class="form-main">
               <div class="title">
@@ -73,8 +73,8 @@
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label>Url<span>*</span></label>
-                      <input name="url" type="text" [(ngModel)]="banner.url" />
+                      <label>Link<span>*</span></label>
+                      <input name="url" type="text" [(ngModel)]="banner.link" />
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">

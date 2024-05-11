@@ -1,6 +1,6 @@
 <section class="hero-slider">
-  @for (item of sliderItems; track item.id) {
-    <div class="single-slider" [ngStyle]="{ backgroundImage: 'url(' + item.imageUrl + ')' }">
+  @for (item of sliderItems; track item._id) {
+    <div class="single-slider" [ngStyle]="{ backgroundImage: 'url(' + item.path + ')' }">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-lg-9 col-12">
@@ -15,7 +15,7 @@
                       {{ item.description }}
                     </p>
                     <div class="button">
-                      <a [routerLink]="item.url" class="btn">Shop Now!</a>
+                      <a [routerLink]="item.link" class="btn">Shop Now!</a>
                     </div>
                   </div>
                 </div>

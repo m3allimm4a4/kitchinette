@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../shared/models/product.interface';
 import { ProductListService } from '../../product-list/product-list.service';
-import { environment } from '../../../environments/environment';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -27,7 +26,7 @@ export class AdminDashboardProductsComponent implements OnInit {
   }
 
   public deleteProduct(product: Product): void {
-    this.http.delete<void>(`${environment.apiUrl}products/${product.id}`).subscribe(() => {
+    this.http.delete<void>(`/products/${product._id}`).subscribe(() => {
       this.refreshProducts();
     });
   }

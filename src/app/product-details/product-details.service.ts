@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { iif, map, Observable } from 'rxjs';
-import { Product, ProductCreate, ProductResponse } from '../shared/models/product.interface';
-import { environment } from '../../environments/environment';
+import { iif, Observable } from 'rxjs';
+import { Product, ProductCreate } from '../shared/models/product.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,33 +9,15 @@ import { environment } from '../../environments/environment';
 export class ProductDetailsService {
   constructor(private http: HttpClient) {}
 
-  public getProductDetails(productId: number): Observable<Product> {
-    return this.http.get<ProductResponse>(`${environment.apiUrl}products/${productId}`).pipe(
-      map(product => {
-        return {
-          ...product,
-          createdDate: new Date(product.createdDate),
-        };
-      })
-    );
+  public getProductDetails(productId: string): Observable<Product> {
+    return this.http.get<Product>(`/products/${productId}`);
   }
 
   public getNewProducts(): Observable<Product[]> {
-    return this.http
-      .get<ProductResponse[]>(`${environment.apiUrl}products`, { params: { newProducts: 1 } })
-      .pipe(
-        map(products => {
-          return products.map(product => {
-            return {
-              ...product,
-              createdDate: new Date(product.createdDate),
-            };
-          });
-        })
-      );
+    return this.http.get<Product[]>(`/products`, { params: { newProducts: 1 } });
   }
 
-  public createOrUpdateProduct(product: ProductCreate, id?: number): Observable<void> {
+  public createOrUpdateProduct(product: ProductCreate, id?: string): Observable<void> {
     const formData = new FormData();
     formData.set('name', product.name);
     formData.set('price', product.price.toString());
@@ -45,14 +26,12 @@ export class ProductDetailsService {
     formData.set('mainImage', product.mainImage);
     formData.set('cardImage', product.cardImage);
     formData.set('cardHoverImage', product.cardHoverImage);
-    formData.set('createdDate', product.createdDate.toString());
     formData.set('trending', `${product.trending ? 1 : 0}`);
-    formData.set('brandId', product.brandId.toString());
-    formData.set('categoryId', product.categoryId.toString());
+    formData.set('category', JSON.stringify(product.category));
     return iif(
       () => !id,
-      this.http.post<void>(`${environment.apiUrl}products${id ? `/${id}` : ''}`, formData),
-      this.http.put<void>(`${environment.apiUrl}products${id ? `/${id}` : ''}`, formData)
+      this.http.post<void>(`/products${id ? `/${id}` : ''}`, formData),
+      this.http.put<void>(`/products${id ? `/${id}` : ''}`, formData),
     );
   }
 }

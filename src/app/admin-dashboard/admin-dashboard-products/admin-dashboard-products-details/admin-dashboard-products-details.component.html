@@ -40,12 +40,12 @@
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>Category<span>*</span></label>
-                  <select class="form-select" type="number" formControlName="categoryId" required="required">
-                    @for (c of categories; track c.id) {
-                      <option [ngValue]="c.id">{{ c.name }}</option>
+                  <select class="form-select" type="number" formControlName="category" required="required">
+                    @for (c of categories; track c._id) {
+                      <option [ngValue]="c._id">{{ c.name }}</option>
                     }
                   </select>
-                  <small *ngIf="displayInvalidFeedback('categoryId')" class="invalid-input">
+                  <small *ngIf="displayInvalidFeedback('category')" class="invalid-input">
                     Minimum old price is 0
                   </small>
                 </div>
@@ -58,7 +58,7 @@
                     type="file"
                     formControlName="mainImage"
                     (change)="onFileChange($event, 'mainImageFile')" />
-                  <small *ngIf="displayInvalidFeedback('categoryId')" class="invalid-input">
+                  <small *ngIf="displayInvalidFeedback('category')" class="invalid-input">
                     Main image required
                   </small>
                 </div>

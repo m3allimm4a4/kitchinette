@@ -4,14 +4,14 @@ import { Product } from '../../shared/models/product.interface';
 import { Category } from '../../shared/models/category.interface';
 import { InitializationService } from '../../shared/services/initialization/initialization.service';
 import { RouterLink } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-product-details-sidebar',
   templateUrl: './product-details-sidebar.component.html',
   styleUrls: ['./product-details-sidebar.component.scss'],
   standalone: true,
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, NgOptimizedImage],
 })
 export class ProductDetailsSidebarComponent implements OnInit {
   public newProducts: Product[] = [];

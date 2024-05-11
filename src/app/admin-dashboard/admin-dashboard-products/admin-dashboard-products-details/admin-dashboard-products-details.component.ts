@@ -32,9 +32,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.maxLength(500)],
     }),
-    categoryId: new FormControl(0, {
-      nonNullable: true,
-    }),
+    category: new FormControl<Category | null>(null),
     trending: new FormControl(false, {
       nonNullable: true,
     }),
@@ -47,7 +45,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
   });
   public isEditMode = false;
   public categories: Category[] = [];
-  private id = 0;
+  private id = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,7 +56,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
+      const id = params.get('id');
       if (!id) return;
       this.productDetailsService.getProductDetails(id).subscribe(p => {
         this.form.patchValue({
@@ -70,12 +68,12 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
     });
     this.initializationService.getAllCategories().subscribe(c => {
       this.categories = c;
-      this.form.controls.categoryId.setValue(c[0].id);
+      this.form.controls.category.setValue(c[0]);
     });
   }
 
   public onSubmit(): void {
-    if (!this.form.valid) return;
+    if (!this.form.valid || !this.form.controls.category.value) return;
 
     const product: ProductCreate = {
       brandId: 1,
@@ -84,8 +82,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
       oldPrice: this.form.controls.oldPrice.value,
       trending: this.form.controls.trending.value,
       description: this.form.controls.description.value,
-      createdDate: new Date().valueOf(),
-      categoryId: this.form.controls.categoryId.value,
+      category: this.form.controls.category.value,
       mainImage: this.form.controls.mainImageFile.value,
       cardImage: this.form.controls.cardImageFile.value,
       cardHoverImage: this.form.controls.cardHoverImageFile.value,

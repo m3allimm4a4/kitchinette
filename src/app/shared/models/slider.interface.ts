@@ -1,9 +1,10 @@
-export interface SliderItem {
-  id: number;
+import { Entity } from './entity.interface';
+
+export interface Slider extends Entity {
   title: string;
   subtitle: string;
   description: string;
-  imageUrl: string;
-  url: string;
+  path: string;
+  link: string;
   imageFile?: File;
 }

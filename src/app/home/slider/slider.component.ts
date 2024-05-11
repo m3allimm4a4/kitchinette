@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../home.service';
-import { SliderItem } from '../../shared/models/slider.interface';
+import { Slider } from '../../shared/models/slider.interface';
 import { RouterLink } from '@angular/router';
 import { NgStyle } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { NgStyle } from '@angular/common';
   imports: [RouterLink, NgStyle],
 })
 export class SliderComponent implements OnInit {
-  public sliderItems: SliderItem[] = [];
+  public sliderItems: Slider[] = [];
 
   constructor(private homeService: HomeService) {}
 

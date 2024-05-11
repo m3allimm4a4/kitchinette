@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
-  FormGroup, ReactiveFormsModule,
+  FormGroup,
+  ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -92,28 +93,21 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public placeOrder() {
     if (!this.checkoutForm.valid) return;
 
-    const firstName = this.checkoutForm.controls.firstName.value;
-    const lastName = this.checkoutForm.controls.lastName.value;
-    const email = this.checkoutForm.controls.email.value;
-    const phone = this.checkoutForm.controls.phone.value;
-    const city = this.checkoutForm.controls.city.value;
-    const address1 = this.checkoutForm.controls.address1.value;
-    const address2 = this.checkoutForm.controls.address2.value;
     this.checkoutDisabled = true;
     this.checkoutLoading = true;
     this.checkoutService
-      .placeOrder(firstName, lastName, email, phone, city, address1, address2)
+      .placeOrder()
       .pipe(
         switchMap(order => {
           const modalRef = this.modalService.open(ModalContentComponent);
           modalRef.componentInstance.header = 'Order Success';
-          modalRef.componentInstance.body = `Order #${order.id}`;
+          modalRef.componentInstance.body = `Order #${order._id}`;
           return race(modalRef.closed, modalRef.dismissed);
         }),
       )
       .subscribe(() => {
         this.cartService.clearCart();
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then();
       });
   }
 

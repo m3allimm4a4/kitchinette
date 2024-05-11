@@ -1,8 +1,9 @@
-export interface Banner {
-  id: number;
+import { Entity } from './entity.interface';
+
+export interface Banner extends Entity {
   title: string;
   subtitle: string;
-  imageUrl: string;
-  url: string;
+  path: string;
+  link: string;
   imageFile?: File;
 }

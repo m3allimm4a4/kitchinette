@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Banner } from '../shared/models/banner.interface';
 import { Product } from '../shared/models/product.interface';
-import { SliderItem } from '../shared/models/slider.interface';
-import { environment } from '../../environments/environment';
+import { Slider } from '../shared/models/slider.interface';
+import { Banner } from '../shared/models/banner.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,35 +12,35 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   public getTrendingItems(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.apiUrl}products`, {
+    return this.http.get<Product[]>('/products', {
       params: { trending: 1 },
     });
   }
 
   public getBanners(): Observable<Banner[]> {
-    return this.http.get<Banner[]>(`${environment.apiUrl}banners`);
+    return this.http.get<Banner[]>('/banners');
   }
 
-  public getSlider(): Observable<SliderItem[]> {
-    return this.http.get<SliderItem[]>(`${environment.apiUrl}slider`);
+  public getSlider(): Observable<Slider[]> {
+    return this.http.get<Slider[]>('/slider');
   }
 
   public updateBanner(banner: Banner): Observable<Banner> {
     const formData = new FormData();
     formData.set('title', banner.title);
     formData.set('subtitle', banner.subtitle);
-    formData.set('url', banner.url);
+    formData.set('link', banner.link);
     formData.set('imageFile', banner.imageFile as File);
-    return this.http.put<Banner>(`${environment.apiUrl}banners/${banner.id}`, formData);
+    return this.http.put<Banner>(`/banners/${banner._id}`, formData);
   }
 
-  public updateSlider(slider: SliderItem): Observable<SliderItem> {
+  public updateSlider(slider: Slider): Observable<Slider> {
     const formData = new FormData();
     formData.set('title', slider.title);
     formData.set('subtitle', slider.subtitle);
     formData.set('description', slider.description);
-    formData.set('url', slider.url);
+    formData.set('link', slider.link);
     formData.set('imageFile', slider.imageFile as File);
-    return this.http.put<SliderItem>(`${environment.apiUrl}slider/${slider.id}`, formData);
+    return this.http.put<Slider>(`/slider/${slider._id}`, formData);
   }
 }

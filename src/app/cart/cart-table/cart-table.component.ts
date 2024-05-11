@@ -4,13 +4,14 @@ import { CartService } from '../cart.service';
 import { CartItem } from '../../shared/models/cart-item.interface';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-cart-table',
   templateUrl: './cart-table.component.html',
   styleUrls: ['./cart-table.component.scss'],
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, NgOptimizedImage],
 })
 export class CartTableComponent implements OnInit, OnDestroy {
   public cartItems: CartItem[] = [];

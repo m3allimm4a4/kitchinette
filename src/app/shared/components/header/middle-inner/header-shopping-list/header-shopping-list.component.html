@@ -8,11 +8,11 @@
       <a class="remove" title="Remove this item" (click)="removeItemFromCart(item)">
         <i class="pi pi-minus"></i>
       </a>
-      <a class="cart-img" [routerLink]="['product-details', item.product.id]">
-        <img [src]="item.product.cardImageUrl" [alt]="item.product.name" />
+      <a class="cart-img" [routerLink]="['product-details', item.product._id]">
+        <img [ngSrc]="item.product.imagePath" [alt]="item.product.name" fill />
       </a>
       <h4>
-        <a [routerLink]="['product-details', item.product.id]">
+        <a [routerLink]="['product-details', item.product._id]">
           {{ item.product.name }}
         </a>
       </h4>

@@ -17,9 +17,9 @@
                         <i class="pi pi-angle-down"></i>
                       </a>
                       <ul class="dropdown">
-                        @for (item of categories; track item.id) {
+                        @for (item of categories; track item._id) {
                           <li>
-                            <a routerLink="/product-list" [queryParams]="{ category: item.id }">
+                            <a routerLink="/product-list" [queryParams]="{ category: item._id }">
                               {{ item.name }}
                             </a>
                           </li>

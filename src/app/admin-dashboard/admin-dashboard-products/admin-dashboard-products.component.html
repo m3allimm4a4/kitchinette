@@ -8,13 +8,13 @@
       </tr>
     </thead>
     <tbody>
-      @for (product of products; track product.id) {
+      @for (product of products; track product._id) {
         <tr>
-          <th scope="row">{{ product.id }}</th>
+          <th scope="row">{{ product._id }}</th>
           <td>{{ product.name }}</td>
-          <td>{{ product.createdDate | date }}</td>
+          <td>{{ product.createdAt | date }}</td>
           <td>
-            <a [routerLink]="[product.id]" [relativeTo]="activatedRoute">
+            <a [routerLink]="[product._id]" [relativeTo]="activatedRoute">
               <i class="pi pi-pencil"></i>
             </a>
             <a [routerLink]="[]" (click)="deleteProduct(product)">

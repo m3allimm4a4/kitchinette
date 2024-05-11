@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { Product, ProductResponse } from '../shared/models/product.interface';
+import { Observable } from 'rxjs';
+import { Product } from '../shared/models/product.interface';
 import { SortBy } from './models/sort-by.enum';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +10,7 @@ import { environment } from '../../environments/environment';
 export class ProductListService {
   constructor(private http: HttpClient) {}
 
-  public getProductList(
-    categoryId?: number,
-    brandId?: number,
-    searchString?: string
-  ): Observable<Product[]> {
+  public getProductList(categoryId?: number, brandId?: number, searchString?: string): Observable<Product[]> {
     let parameters = {};
     if (categoryId) {
       parameters = { category: categoryId };
@@ -26,18 +21,7 @@ export class ProductListService {
     if (searchString) {
       parameters = { ...parameters, search: searchString };
     }
-    return this.http
-      .get<ProductResponse[]>(`${environment.apiUrl}products`, { params: parameters })
-      .pipe(
-        map(products => {
-          return products.map(product => {
-            return {
-              ...product,
-              createdDate: new Date(product.createdDate),
-            };
-          });
-        })
-      );
+    return this.http.get<Product[]>('/products', { params: parameters });
   }
 
   public sortProductList(productList: Product[], sortBy: SortBy): Product[] {

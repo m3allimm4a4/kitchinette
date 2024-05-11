@@ -1,65 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CartService } from '../cart/cart.service';
-import { Order, OrderResponse } from '../shared/models/order.interface';
-import { environment } from '../../environments/environment';
+import { Order } from '../shared/models/order.interface';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(private http: HttpClient, private cartService: CartService) {}
+  constructor(
+    private http: HttpClient,
+    private cartService: CartService,
+    private authService: AuthService,
+  ) {}
 
-  public placeOrder(
-    firstName: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    city: string,
-    address1: string,
-    address2: string
-  ): Observable<Order> {
+  public placeOrder(): Observable<Order> {
+    const user = this.authService.getUser();
+    if (!user) {
+      throw new Error('User not logged in');
+    }
     const subtotal = this.cartService.getTotalAmount();
     const discount = 0;
-    const newOrder: OrderResponse = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      city,
-      address1,
-      address2,
+    const newOrder: Order = {
+      _id: '',
       subtotal: subtotal,
       total: subtotal - discount,
       discount: discount,
-      createdDate: new Date().valueOf(),
-      items: this.cartService.getItems(),
+      products: this.cartService.getItems(),
+      user: user,
     };
-    return this.http.post<Order>(`${environment.apiUrl}orders`, newOrder);
+    return this.http.post<Order>('/orders', newOrder);
   }
 
   public getAllOrders(): Observable<Order[]> {
-    return this.http.get<OrderResponse[]>(`${environment.apiUrl}orders`).pipe(
-      map(orders => {
-        return orders.map(order => {
-          return {
-            ...order,
-            createdDate: new Date(order.createdDate),
-          };
-        });
-      })
-    );
+    return this.http.get<Order[]>('/orders');
   }
 
   public getOrder(orderId: number): Observable<Order> {
-    return this.http.get<OrderResponse>(`${environment.apiUrl}orders/${orderId}`).pipe(
-      map(order => {
-        return {
-          ...order,
-          createdDate: new Date(order.createdDate),
-        };
-      })
-    );
+    return this.http.get<Order>(`/orders/${orderId}`);
   }
 }

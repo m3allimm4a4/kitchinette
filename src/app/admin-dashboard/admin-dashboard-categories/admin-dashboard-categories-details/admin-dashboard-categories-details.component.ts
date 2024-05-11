@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from '../../../shared/models/category.interface';
 import { InitializationService } from '../../../shared/services/initialization/initialization.service';
-import { environment } from '../../../../environments/environment';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AdminDashboardCategoriesDetailsComponent implements OnInit {
   public category: Category = {
-    id: 0,
+    _id: '',
     name: '',
   };
   public isEditMode = false;
@@ -30,7 +29,7 @@ export class AdminDashboardCategoriesDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
+      const id = params.get('id')
       if (!id) {
         return;
       }
@@ -44,9 +43,9 @@ export class AdminDashboardCategoriesDetailsComponent implements OnInit {
   public onSubmit(): void {
     let request$: Observable<Category>;
     if (this.isEditMode) {
-      request$ = this.http.put<Category>(`${environment.apiUrl}categories`, this.category);
+      request$ = this.http.put<Category>('/categories', this.category);
     } else {
-      request$ = this.http.post<Category>(`${environment.apiUrl}categories`, this.category);
+      request$ = this.http.post<Category>('/categories', this.category);
     }
     request$.subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.activatedRoute }).then();

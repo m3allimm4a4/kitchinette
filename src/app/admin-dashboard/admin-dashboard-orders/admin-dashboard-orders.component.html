@@ -12,17 +12,17 @@
       </tr>
     </thead>
     <tbody>
-      @for (order of orders; track order.id) {
+      @for (order of orders; track order._id) {
         <tr>
-          <th scope="row">{{ order.id }}</th>
-          <td>{{ order.firstName }}</td>
-          <td>{{ order.lastName }}</td>
-          <td>{{ order.email }}</td>
-          <td>{{ order.phone }}</td>
+          <th scope="row">{{ order._id }}</th>
+          <td>{{ order.user.firstName }}</td>
+          <td>{{ order.user.lastName }}</td>
+          <td>{{ order.user.email }}</td>
+          <td>{{ order.user.phone }}</td>
           <td>{{ order.total }}</td>
-          <td>{{ order.createdDate.toLocaleDateString() }}</td>
+          <td>{{ order.createdAt | date }}</td>
           <td>
-            <a [routerLink]="[order.id]" [relativeTo]="activatedRoute">
+            <a [routerLink]="[order._id]" [relativeTo]="activatedRoute">
               <i class="pi pi-info-circle"></i>
             </a>
           </td>

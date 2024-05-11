@@ -2,9 +2,9 @@
   <div class="single-widget category">
     <h3 class="title">Categories</h3>
     <ul class="categor-list">
-      @for (category of categories; track category.id) {
+      @for (category of categories; track category._id) {
         <li>
-          <a routerLink="/product-list" [queryParams]="{ category: category.id }">
+          <a routerLink="/product-list" [queryParams]="{ category: category._id }">
             {{ category.name }}
           </a>
         </li>
@@ -15,19 +15,19 @@
   <div class="single-widget recent-post">
     <h3 class="title">New Products</h3>
 
-    @for (product of newProducts; track product.id) {
+    @for (product of newProducts; track product._id) {
       <div class="single-post">
         <div class="image">
-          <img [src]="product.cardImageUrl" [alt]="product.name" />
+          <img [ngSrc]="product.imagePath" [alt]="product.name" fill />
         </div>
         <div class="content">
           <h5>
-            <a [routerLink]="['/product-details', product.id]">{{ product.name }}</a>
+            <a [routerLink]="['/product-details', product._id]">{{ product.name }}</a>
           </h5>
           <ul class="comment">
             <li>
               <i class="pi pi-calendar"> </i>
-              {{ product.createdDate | date }}
+              {{ product.createdAt | date }}
             </li>
           </ul>
         </div>

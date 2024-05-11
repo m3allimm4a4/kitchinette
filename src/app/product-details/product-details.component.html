@@ -1,46 +1,50 @@
-<app-breadcrumbs [routeName]="product.name"></app-breadcrumbs>
+<app-breadcrumbs [routeName]="product?.name || ''"></app-breadcrumbs>
 
 <section class="blog-single section">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-12">
-        <div class="blog-single-main">
-          <div class="row">
-            <div class="col-12">
-              <div class="image">
-                <img [src]="product.mainImageUrl" [alt]="product.name" />
-              </div>
+    @defer (when product) {
+      <div class="row">
+        <div class="col-lg-8 col-12">
+          <div class="blog-single-main">
+            @if (this.product) {
+              <div class="row">
+                <div class="col-12">
+                  <div class="image">
+                    <img *ngIf="product?.mainImagePath" [ngSrc]="product.mainImagePath" [alt]="product?.name" fill />
+                  </div>
 
-              <div class="blog-detail">
-                <h2 class="blog-title">{{ product.name }}</h2>
+                  <div class="blog-detail">
+                    <h2 class="blog-title">{{ product?.name }}</h2>
 
-                <div class="blog-meta">
-                  <span class="author">
-                    <a>
-                      <i class="pi pi-calendar"></i>
-                      {{ product.createdDate | date }}
-                    </a>
-                  </span>
+                    <div class="blog-meta">
+                      <span class="author">
+                        <a>
+                          <i class="pi pi-calendar"></i>
+                          {{ product?.createdAt | date }}
+                        </a>
+                      </span>
+                    </div>
+
+                    <div class="content">
+                      <p>
+                        {{ product?.description }}
+                      </p>
+                      <p>
+                        <button class="btn animate" (click)="addToCart()">ADD TO CART</button>
+                      </p>
+                    </div>
+                  </div>
+
+                  <app-product-details-social-links></app-product-details-social-links>
                 </div>
-
-                <div class="content">
-                  <p>
-                    {{ product.description }}
-                  </p>
-                  <p>
-                    <button class="btn animate" (click)="addToCart()">ADD TO CART</button>
-                  </p>
-                </div>
               </div>
-
-              <app-product-details-social-links></app-product-details-social-links>
-            </div>
+            }
           </div>
         </div>
+        <div class="col-lg-4 col-12">
+          <app-product-details-sidebar></app-product-details-sidebar>
+        </div>
       </div>
-      <div class="col-lg-4 col-12">
-        <app-product-details-sidebar></app-product-details-sidebar>
-      </div>
-    </div>
+    }
   </div>
 </section>

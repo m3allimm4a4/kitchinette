@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Category } from '../../shared/models/category.interface';
 import { InitializationService } from '../../shared/services/initialization/initialization.service';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-admin-dashboard-categories',
@@ -26,7 +25,7 @@ export class AdminDashboardCategoriesComponent implements OnInit {
   }
 
   public deleteCategory(category: Category): void {
-    this.http.delete<void>(`${environment.apiUrl}categories/${category.id}`).subscribe(() => {
+    this.http.delete<void>(`/categories/${category._id}`).subscribe(() => {
       this.refreshCategories();
     });
   }

@@ -11,7 +11,7 @@ export class CartService {
   private readonly cartKey = 'cart';
   private cartItems$ = new BehaviorSubject<CartItem[]>([]);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: string) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       const json = localStorage.getItem(this.cartKey);
       if (json) {
@@ -47,7 +47,7 @@ export class CartService {
 
   public addItem(product: Product): void {
     const cartItems = this.cartItems$.value;
-    const item = cartItems.find(p => p.product.id === product.id);
+    const item = cartItems.find(p => p.product._id === product._id);
     if (item) {
       item.quantity++;
     } else {
@@ -64,7 +64,7 @@ export class CartService {
 
   public removeItem(item: CartItem): void {
     const cartItems = this.cartItems$.value;
-    const index = cartItems.findIndex(p => p.product.id === item.product.id);
+    const index = cartItems.findIndex(p => p.product._id === item.product._id);
     if (index === -1) return;
 
     cartItems.splice(index, 1);
