@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
 import { UnauthorizedError } from '../errors/unauthorized.error';
 import { verify } from 'jsonwebtoken';
-import { jwtSecret } from '../environments/environment.development';
 import { IUser, UserRole } from '../interfaces/user.interface';
+import { environment } from '../environments/environment';
 
 export const auth: (roles: UserRole[]) => RequestHandler = roles => {
   return (req, _res, next) => {
@@ -10,7 +10,7 @@ export const auth: (roles: UserRole[]) => RequestHandler = roles => {
     const token = authHeader && authHeader.replace('Bearer ', '');
     if (!token) throw new UnauthorizedError();
 
-    verify(token, jwtSecret, (error, decoded) => {
+    verify(token, environment.jwtSecret, (error, decoded) => {
       if (error || !decoded) {
         throw new UnauthorizedError();
       }

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
+import { UserRole } from '../../../api/interfaces/user.interface';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
@@ -10,17 +13,28 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
 })
 export class AuthComponent {
-  public username = '';
+  public email = '';
   public password = '';
   public showMessage = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private authService: AuthService,
+  ) {}
 
   onLogin(): void {
-    if (this.username === 'admin' && this.password === 'admin') {
-      this.router.navigate(['/admin-dashboard']).then();
-      return;
-    }
-    this.showMessage = true;
+    this.authService.login(this.email, this.password).subscribe({
+      next: user => {
+        if (user.roles.includes(UserRole.ADMIN)) {
+          this.router.navigate(['/admin-dashboard']).then();
+        } else {
+          this.location.back();
+        }
+      },
+      error: () => {
+        this.showMessage = true;
+      },
+    });
   }
 }

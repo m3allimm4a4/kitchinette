@@ -12,7 +12,7 @@
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label>Username<span>*</span></label>
-                    <input name="username" type="text" [(ngModel)]="username" />
+                    <input name="username" type="text" [(ngModel)]="email" />
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn" (click)="onLogin()">Login</button>
                   </div>
                   @if (showMessage) {
-                    <small>Invalid Credentials</small>
+                    <small>Invalid email or password</small>
                   }
                 </div>
               </div>

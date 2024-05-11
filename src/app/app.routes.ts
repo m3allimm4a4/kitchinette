@@ -31,6 +31,10 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/auth.component').then(m => m.AuthComponent),
   },
   {
+    path: 'sign-up',
+    loadComponent: () => import('./auth/sign-up/sign-up.component').then(m => m.SignUpComponent),
+  },
+  {
     path: 'admin-dashboard',
     loadChildren: () => import('./admin-dashboard/admin-dashboard-routes').then(m => m.ADMIN_DASHBOARD_ROUTES),
   },
