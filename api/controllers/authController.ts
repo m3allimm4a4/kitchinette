@@ -2,9 +2,9 @@ import { RequestHandler } from 'express';
 import { catchAsync } from '../shared/catchAsync';
 import { generateAuthToken, hashPassword, isValidPassword } from '../shared/auth-helper';
 import { User } from '../models/user.model';
-import { jwtExpiry } from '../environments/environment.development';
 import { UnauthorizedError } from '../errors/unauthorized.error';
 import { IUser, UserRole } from '../interfaces/user.interface';
+import { environment } from '../environments/environment';
 
 export const login: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const { email, password } = req.body;
@@ -18,8 +18,11 @@ export const login: RequestHandler = catchAsync(async (req, res): Promise<void> 
   const token = generateAuthToken(user);
   res.status(200).json({
     accessToken: token,
-    expiresIn: jwtExpiry,
-    roles: user.roles,
+    expiresIn: environment.jwtExpiry,
+    user: {
+      ...user,
+      password: undefined,
+    },
   });
 });
 
@@ -39,7 +42,10 @@ export const signUp: RequestHandler = catchAsync(async (req, res): Promise<void>
   const token = generateAuthToken(newUser);
   res.status(200).json({
     accessToken: token,
-    expiresIn: jwtExpiry,
-    roles: user.roles,
+    expiresIn: environment.jwtExpiry,
+    user: {
+      ...user,
+      password: undefined,
+    },
   });
 });

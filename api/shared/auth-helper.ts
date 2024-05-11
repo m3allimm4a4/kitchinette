@@ -1,10 +1,10 @@
-import { bcryptSaltRounds, jwtExpiry, jwtSecret } from '../environments/environment.development';
 import { sign } from 'jsonwebtoken';
 import { compare, hash } from 'bcrypt';
 import { IUser } from '../interfaces/user.interface';
+import { environment } from '../environments/environment';
 
 export const generateAuthToken = (user: IUser) => {
-  return sign(user, jwtSecret, { expiresIn: jwtExpiry });
+  return sign(user, environment.jwtSecret, { expiresIn: environment.jwtExpiry });
 };
 
 export const isValidPassword = async (password: string, hash: string) => {
@@ -12,5 +12,5 @@ export const isValidPassword = async (password: string, hash: string) => {
 };
 
 export const hashPassword = async (password: string) => {
-  return await hash(password, bcryptSaltRounds);
+  return await hash(password, environment.bcryptSaltRounds);
 };

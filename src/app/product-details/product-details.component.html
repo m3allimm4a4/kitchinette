@@ -10,24 +10,24 @@
               <div class="row">
                 <div class="col-12">
                   <div class="image">
-                    <img *ngIf="product?.mainImagePath" [ngSrc]="product.mainImagePath" [alt]="product?.name" fill />
+                    <img [ngSrc]="product.mainImagePath" [alt]="product.name" fill />
                   </div>
 
                   <div class="blog-detail">
-                    <h2 class="blog-title">{{ product?.name }}</h2>
+                    <h2 class="blog-title">{{ product.name }}</h2>
 
                     <div class="blog-meta">
                       <span class="author">
                         <a>
                           <i class="pi pi-calendar"></i>
-                          {{ product?.createdAt | date }}
+                          {{ product.createdAt | date }}
                         </a>
                       </span>
                     </div>
 
                     <div class="content">
                       <p>
-                        {{ product?.description }}
+                        {{ product.description }}
                       </p>
                       <p>
                         <button class="btn animate" (click)="addToCart()">ADD TO CART</button>
