@@ -44,12 +44,18 @@ importers:
       '@ng-bootstrap/ng-bootstrap':
         specifier: ^16.0.0
         version: 16.0.0(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(@angular/forms@17.2.4(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(@angular/platform-browser@17.2.4(@angular/animations@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4)))(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4)))(rxjs@7.8.1))(@angular/localize@17.2.4(@angular/compiler-cli@17.2.4(@angular/compiler@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4)))(typescript@5.3.3))(@angular/compiler@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))))(@popperjs/core@2.11.8)(rxjs@7.8.1)
+      '@types/cors':
+        specifier: ^2.8.17
+        version: 2.8.17
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1(encoding@0.1.13)
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.5
       express:
         specifier: ^4.18.2
         version: 4.18.3

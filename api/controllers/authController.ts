@@ -15,7 +15,7 @@ export const login: RequestHandler = catchAsync(async (req, res): Promise<void> 
   if (await isValidPassword(password, user.password)) {
     throw new UnauthorizedError();
   }
-  const token = generateAuthToken(user);
+  const token = generateAuthToken(user.toObject());
   res.status(200).json({
     accessToken: token,
     expiresIn: environment.jwtExpiry,
@@ -39,7 +39,7 @@ export const signUp: RequestHandler = catchAsync(async (req, res): Promise<void>
     phone: user.phone,
     city: user.city,
   });
-  const token = generateAuthToken(newUser);
+  const token = generateAuthToken(newUser.toObject());
   res.status(200).json({
     accessToken: token,
     expiresIn: environment.jwtExpiry,

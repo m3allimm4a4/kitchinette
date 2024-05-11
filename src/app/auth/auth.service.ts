@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   public signUp(user: User) {
-    return this.http.post<AuthReponse>('/auth/signup', user).pipe(
+    return this.http.post<AuthReponse>('/auth/sign-up', user).pipe(
       map(response => {
         const expiryDate = Date.now() + response.expiresIn;
         this.setAuthData(response.user, response.accessToken, expiryDate);

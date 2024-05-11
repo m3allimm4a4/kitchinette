@@ -1,0 +1,21 @@
+.login-url {
+  color: rgba(var(--bs-link-color-rgb));
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.validation-message {
+  color: red;
+}
+
+input {
+  &.ng-invalid {
+    &.ng-touched {
+      &.ng-dirty {
+        border-color: red !important;
+      }
+    }
+  }
+}

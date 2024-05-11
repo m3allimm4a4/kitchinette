@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { UserRole } from '../../../api/interfaces/user.interface';
@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
 })
 export class AuthComponent {
   public email = '';

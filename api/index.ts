@@ -12,12 +12,14 @@ import { NotFoundError } from './errors/not-found.error';
 import { authRoutes } from './routes/authRoutes';
 import { auth } from './middlewares/auth.middleware';
 import { UserRole } from './interfaces/user.interface';
+import cors from 'cors';
 
 const run = async (): Promise<void> => {
   const server = express();
 
   await mongoose.connect(environment.databaseUrl);
 
+  server.use(cors());
   server.use(express.json());
   server.use(
     fileUpload({
