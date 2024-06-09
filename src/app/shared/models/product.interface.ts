@@ -22,6 +22,5 @@ export interface ProductCreate {
   cardImage: File;
   cardHoverImage: File;
   trending: boolean;
-  category: Category;
-  brandId: number;
+  category: string;
 }

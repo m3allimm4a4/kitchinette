@@ -4,7 +4,7 @@
       @for (banner of banners; track banner._id) {
         <div class="col-lg-4 col-md-6 col-12">
           <div class="single-banner">
-            <img [ngSrc]="banner.path" [alt]="banner.title" fill />
+            <img [src]="banner.path" [alt]="banner.title" />
             <div class="content">
               <p>{{ banner.title }}</p>
               <h3>{{ banner.subtitle }}</h3>

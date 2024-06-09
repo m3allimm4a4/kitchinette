@@ -27,7 +27,7 @@ export class ProductDetailsService {
     formData.set('cardImage', product.cardImage);
     formData.set('cardHoverImage', product.cardHoverImage);
     formData.set('trending', `${product.trending ? 1 : 0}`);
-    formData.set('category', JSON.stringify(product.category));
+    formData.set('category', product.category);
     return iif(
       () => !id,
       this.http.post<void>(`/products${id ? `/${id}` : ''}`, formData),

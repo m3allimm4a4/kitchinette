@@ -76,13 +76,12 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
     if (!this.form.valid || !this.form.controls.category.value) return;
 
     const product: ProductCreate = {
-      brandId: 1,
       name: this.form.controls.name.value,
       price: this.form.controls.price.value,
       oldPrice: this.form.controls.oldPrice.value,
       trending: this.form.controls.trending.value,
       description: this.form.controls.description.value,
-      category: this.form.controls.category.value,
+      category: this.form.controls.category.value._id,
       mainImage: this.form.controls.mainImageFile.value,
       cardImage: this.form.controls.cardImageFile.value,
       cardHoverImage: this.form.controls.cardHoverImageFile.value,

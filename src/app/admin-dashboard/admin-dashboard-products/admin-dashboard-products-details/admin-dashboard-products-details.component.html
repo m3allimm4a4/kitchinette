@@ -42,7 +42,7 @@
                   <label>Category<span>*</span></label>
                   <select class="form-select" type="number" formControlName="category" required="required">
                     @for (c of categories; track c._id) {
-                      <option [ngValue]="c._id">{{ c.name }}</option>
+                      <option [ngValue]="c">{{ c.name }}</option>
                     }
                   </select>
                   <small *ngIf="displayInvalidFeedback('category')" class="invalid-input">

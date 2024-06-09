@@ -1,6 +1,7 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 import { IProduct } from '../interfaces/product.interface';
-import { CategorySchema } from './category.model';
+import { Category } from './category.model';
+
 
 export const ProductSchema = new Schema<IProduct>({
   name: { type: String, required: true },
@@ -11,7 +12,7 @@ export const ProductSchema = new Schema<IProduct>({
   trending: { type: Boolean, required: true },
   price: { type: Number, required: true },
   oldPrice: { type: Number },
-  category: { type: CategorySchema, required: true },
+  category: { type: Types.ObjectId, ref: Category  },
 });
 
 export const Product = model<IProduct>('Product', ProductSchema);

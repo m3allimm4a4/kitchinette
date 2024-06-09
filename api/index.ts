@@ -39,6 +39,8 @@ const run = async (): Promise<void> => {
   server.use('/api/orders', auth([UserRole.NORMAL]), ordersRoutes);
   server.use('/api/auth', authRoutes);
 
+  server.use('/images', express.static(environment.imagesPath));
+
   server.get('/api/**', (_req, _res) => {
     throw new NotFoundError();
   });

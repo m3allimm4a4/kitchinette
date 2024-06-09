@@ -1,8 +1,9 @@
-import { afterNextRender, Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, map, Subscription, timer } from 'rxjs';
-import { User } from '../shared/models/user.interface';
+import { User, UserRole } from '../shared/models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { AuthReponse } from './models/auth-reponse.interface';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,11 @@ export class AuthService {
   private readonly accessToken$ = new BehaviorSubject<string>('');
   private logOutTimerSubscription = new Subscription();
 
-  constructor(private http: HttpClient) {
-    afterNextRender(() => {
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) platformId: Object,
+  ) {
+    if (isPlatformBrowser(platformId)) {
       const userString = localStorage.getItem('user');
       const accessToken = localStorage.getItem('accessToken');
       const tokenExpiry = localStorage.getItem('tokenExpiry');
@@ -21,11 +25,15 @@ export class AuthService {
         const user = JSON.parse(userString);
         this.setAuthData(user, accessToken, +tokenExpiry);
       }
-    });
+    }
   }
 
   public isUserLoggedIn$() {
     return this.accessToken$.pipe(map(token => !!token));
+  }
+
+  public isAdminUser$() {
+    return this.user$.pipe(map(user => !!user && user.roles.includes(UserRole.ADMIN)));
   }
 
   public getUser$() {

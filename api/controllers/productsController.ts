@@ -67,7 +67,7 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
       hoverImagePath: join(environment.imagesPath, cardHoverImageName),
       description: req.body.description,
       trending: Boolean(req.body.trending),
-      category: req.body.categoryId,
+      category: req.body.category,
     });
     res.status(200).json(newProduct);
   } catch (error) {
@@ -113,7 +113,7 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
     product.hoverImagePath = join(environment.imagesPath, cardHoverImageName);
     product.description = req.body.description;
     product.trending = req.body.trending;
-    product.category = req.body.categoryId;
+    product.category = req.body.category;
     const oldProduct = await product.save();
     res.status(200).json(oldProduct);
   } catch (error) {

@@ -29,6 +29,11 @@
                     <li routerLinkActive="active">
                       <a routerLink="/contact-us">Contact Us</a>
                     </li>
+                    @if (isAdminUser) {
+                      <li routerLinkActive="active">
+                        <a routerLink="/admin-dashboard">Admin Page</a>
+                      </li>
+                    }
                   </ul>
                 </div>
               </div>
