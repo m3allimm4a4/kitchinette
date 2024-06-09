@@ -29,9 +29,9 @@ export class ProductListSidebarComponent implements OnInit {
       this.categories = data;
     });
 
-    this.initService.getAllBrands().subscribe(data => {
-      this.brands = data;
-    });
+    // this.initService.getAllBrands().subscribe(data => {
+    //   this.brands = data;
+    // });
   }
 
   public clearFilter() {

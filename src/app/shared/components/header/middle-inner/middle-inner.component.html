@@ -72,9 +72,22 @@
       <div class="col-lg-2 col-md-3 col-12">
         <div class="right-bar">
           <div class="sinlge-bar">
-            <a routerLink="/login" class="single-icon">
-              <i class="pi pi-user"></i>
-            </a>
+            @if (user) {
+              <p-avatar
+                styleClass="mr-2"
+                shape="circle"
+                (click)="userOverlay.toggle($event)"
+                [label]="(user.firstName[0] + user.lastName[0]).toUpperCase()" />
+              <p-overlayPanel #userOverlay appendTo="body">
+                <div>
+                  <p-button label="sign out" severity="warning" (onClick)="logOut()"></p-button>
+                </div>
+              </p-overlayPanel>
+            } @else {
+              <a routerLink="/login" class="single-icon">
+                <i class="pi pi-user"></i>
+              </a>
+            }
           </div>
 
           <div class="sinlge-bar shopping">

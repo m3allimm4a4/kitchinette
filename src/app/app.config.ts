@@ -7,6 +7,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { HttpUrlInterceptor } from './interceptors/http-url.interceptor';
 import { provideImgixLoader } from '@angular/common';
 import { environment } from '../environments/environment';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([HttpUrlInterceptor])),
     provideImgixLoader(environment.imagesUrl),
+    provideAnimations(),
   ],
 };

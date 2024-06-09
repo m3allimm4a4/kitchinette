@@ -12,15 +12,16 @@ export const login: RequestHandler = catchAsync(async (req, res): Promise<void> 
   if (!user) {
     throw new UnauthorizedError();
   }
-  if (await isValidPassword(password, user.password)) {
+  if (!await isValidPassword(password, user.password)) {
     throw new UnauthorizedError();
   }
-  const token = generateAuthToken(user.toObject());
+  const userObject = user.toObject();
+  const token = generateAuthToken(userObject);
   res.status(200).json({
     accessToken: token,
     expiresIn: environment.jwtExpiry,
     user: {
-      ...user,
+      ...userObject,
       password: undefined,
     },
   });
@@ -39,12 +40,13 @@ export const signUp: RequestHandler = catchAsync(async (req, res): Promise<void>
     phone: user.phone,
     city: user.city,
   });
-  const token = generateAuthToken(newUser.toObject());
+  const newUserObject = newUser.toObject()
+  const token = generateAuthToken(newUserObject);
   res.status(200).json({
     accessToken: token,
     expiresIn: environment.jwtExpiry,
     user: {
-      ...user,
+      ...newUserObject,
       password: undefined,
     },
   });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HeaderShoppingListComponent } from './header-shopping-list/header-shopping-list.component';
@@ -6,6 +6,12 @@ import { InitializationService } from '../../../services/initialization/initiali
 import { Category } from '../../../models/category.interface';
 import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
+import { User } from '../../../models/user.interface';
+import { AuthService } from '../../../../auth/auth.service';
+import { Subscription } from 'rxjs';
+import { AvatarModule } from 'primeng/avatar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-middle-inner',
@@ -21,9 +27,13 @@ import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
     NgForOf,
     NgbCollapse,
     NgOptimizedImage,
+    AvatarModule,
+    OverlayPanelModule,
+    ButtonModule,
   ],
 })
-export class MiddleInnerComponent implements OnInit {
+export class MiddleInnerComponent implements OnInit, OnDestroy {
+  public user: User | null = null;
   public searchString = '';
   public cartItemCount = 0;
   public categories: Category[] = [];
@@ -31,15 +41,24 @@ export class MiddleInnerComponent implements OnInit {
   public categoriesCollapsed = true;
   public categoriesAngle = 'pi-angle-down';
 
+  private subscription = new Subscription();
+
   constructor(
     private router: Router,
     private initService: InitializationService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.initService.getAllCategories().subscribe(categories => {
       this.categories = categories;
     });
+
+    this.subscription.add(this.authService.getUser$().subscribe(user => (this.user = user)));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public onCategoriesClick() {
@@ -52,5 +71,9 @@ export class MiddleInnerComponent implements OnInit {
       this.router.navigate(['/product-list'], { queryParams: { search: this.searchString } }).then();
       this.searchString = '';
     }
+  }
+
+  public logOut() {
+    this.authService.logOut()
   }
 }
