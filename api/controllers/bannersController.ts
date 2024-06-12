@@ -1,8 +1,6 @@
 import { RequestHandler } from 'express';
 import { deleteImageFile, getImageName, saveUploadedFile } from '../shared/helpers';
 import { UploadedFile } from 'express-fileupload';
-import { join } from 'path';
-import { environment } from '../environments/environment';
 import { Banner } from '../models/banner.model';
 import { NotFoundError } from '../errors/not-found.error';
 import { catchAsync } from '../shared/catchAsync';
@@ -39,7 +37,7 @@ export const updateBanner: RequestHandler = catchAsync(async (req, res): Promise
       title: req.body.title,
       subtitle: req.body.subtitle,
       url: req.body.url,
-      imageUrl: join(environment.imagesPath, imageName),
+      imageUrl: imageName,
     });
     res.status(200).json(newBanner);
   } catch (error) {

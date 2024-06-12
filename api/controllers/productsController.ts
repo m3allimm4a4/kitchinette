@@ -5,8 +5,6 @@ import { InvalidIdError } from '../errors/invalid-id.error';
 import { NotFoundError } from '../errors/not-found.error';
 import { UploadedFile } from 'express-fileupload';
 import { deleteImageFile, getImageName, saveUploadedFile } from '../shared/helpers';
-import { join } from 'node:path';
-import { environment } from '../environments/environment';
 
 export const getProducts: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   let query = Product.find();
@@ -62,9 +60,9 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
       name: req.body.name,
       price: +req.body.price,
       oldPrice: +req.body.oldPrice,
-      imagePath: join(environment.imagesPath, mainImageName),
-      mainImagePath: join(environment.imagesPath, cardImageName),
-      hoverImagePath: join(environment.imagesPath, cardHoverImageName),
+      imagePath: mainImageName,
+      mainImagePath: cardImageName,
+      hoverImagePath: cardHoverImageName,
       description: req.body.description,
       trending: Boolean(req.body.trending),
       category: req.body.category,
@@ -108,9 +106,9 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
   try {
     product.name = req.body.name;
     product.price = +req.body.price;
-    product.imagePath = join(environment.imagesPath, mainImageName);
-    product.mainImagePath = join(environment.imagesPath, cardImageName);
-    product.hoverImagePath = join(environment.imagesPath, cardHoverImageName);
+    product.imagePath = mainImageName;
+    product.mainImagePath = cardImageName;
+    product.hoverImagePath = cardHoverImageName;
     product.description = req.body.description;
     product.trending = req.body.trending;
     product.category = req.body.category;
