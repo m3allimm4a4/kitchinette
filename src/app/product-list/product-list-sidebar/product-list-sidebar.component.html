@@ -10,19 +10,6 @@
     </ul>
   </div>
 
-  <div class="single-widget category">
-    <h3 class="title">Brands</h3>
-    <ul class="categor-list">
-      @for (brand of brands; track brand._id) {
-        <li>
-          <a [routerLink]="[]" [queryParams]="{ brand: brand._id }" queryParamsHandling="merge">
-            {{ brand.name }}
-          </a>
-        </li>
-      }
-    </ul>
-  </div>
-
   <div class="single-widget range">
     <button type="button" class="btn animate" (click)="clearFilter()">Clear Filter</button>
   </div>
