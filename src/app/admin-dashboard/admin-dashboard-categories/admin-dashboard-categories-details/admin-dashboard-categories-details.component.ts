@@ -29,7 +29,7 @@ export class AdminDashboardCategoriesDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get('id')
+      const id = params.get('id');
       if (!id || id === 'new') {
         return;
       }
@@ -43,7 +43,7 @@ export class AdminDashboardCategoriesDetailsComponent implements OnInit {
   public onSubmit(): void {
     let request$: Observable<Category>;
     if (this.isEditMode) {
-      request$ = this.http.put<Category>('/categories', this.category);
+      request$ = this.http.put<Category>(`/categories/${this.category._id}`, this.category);
     } else {
       request$ = this.http.post<Category>('/categories', this.category);
     }

@@ -12,7 +12,7 @@ export const getProducts: RequestHandler = catchAsync(async (req, res): Promise<
     query = query.find({ category: { _id: req.query['category'] } });
   }
   if (req.query['search']) {
-    query = query.find({ name: { $text: { $search: req.query['search'] } } });
+    query = query.find({ name: { $regex: req.query['search'] } });
   }
   if (req.query['trending']) {
     query = query.find({ trending: req.query['trending'] });
@@ -64,7 +64,7 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
       mainImagePath: cardImageName,
       hoverImagePath: cardHoverImageName,
       description: req.body.description,
-      trending: Boolean(req.body.trending),
+      trending: req.body.trending === 'true',
       category: req.body.category,
     });
     res.status(200).json(newProduct);
