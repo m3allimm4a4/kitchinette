@@ -13,7 +13,7 @@ export const getBanners: RequestHandler = catchAsync(async (_req, res): Promise<
 
 export const getBanner: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const id = req.params['id'];
-  if (!id) throw new InvalidIdError()
+  if (!id) throw new InvalidIdError();
   const banner = await Banner.findById(id);
   if (!banner) throw new NotFoundError();
   res.status(200).json(banner);
@@ -36,8 +36,8 @@ export const updateBanner: RequestHandler = catchAsync(async (req, res): Promise
     const newBanner = await Banner.findByIdAndUpdate(id, {
       title: req.body.title,
       subtitle: req.body.subtitle,
-      url: req.body.url,
-      imageUrl: imageName,
+      link: req.body.link,
+      path: imageName,
     });
     res.status(200).json(newBanner);
   } catch (error) {

@@ -8,12 +8,13 @@ import { HttpUrlInterceptor } from './interceptors/http-url.interceptor';
 import { provideImgixLoader } from '@angular/common';
 import { environment } from '../environments/environment';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([HttpUrlInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([HttpUrlInterceptor, HttpAuthInterceptor])),
     provideImgixLoader(environment.imagesUrl),
     provideAnimations(),
   ],

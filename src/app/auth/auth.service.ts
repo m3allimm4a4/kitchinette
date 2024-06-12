@@ -28,8 +28,8 @@ export class AuthService {
     }
   }
 
-  public isUserLoggedIn$() {
-    return this.accessToken$.pipe(map(token => !!token));
+  public isUserLoggedIn() {
+    return !!this.accessToken$.value;
   }
 
   public isAdminUser$() {
@@ -42,6 +42,10 @@ export class AuthService {
 
   public getUser() {
     return this.user$.value;
+  }
+
+  public getAccessToken() {
+    return this.accessToken$.value;
   }
 
   public login(email: string, password: string) {
