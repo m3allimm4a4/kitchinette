@@ -8,6 +8,7 @@ import { BreadcrumbsComponent } from '../shared/components/breadcrumbs/breadcrum
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
 import { ProductListSidebarComponent } from './product-list-sidebar/product-list-sidebar.component';
 import { ProductListTopbarComponent } from './product-list-topbar/product-list-topbar.component';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -26,16 +27,20 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParamMap.subscribe(paramMap => {
-      const categoryId = Number(paramMap.get(FilterBy.category));
-      const brandId = Number(paramMap.get(FilterBy.brand));
-      const searchString = paramMap.get(FilterBy.search) || '';
+    this.activatedRoute.queryParamMap
+      .pipe(
+        switchMap(paramMap => {
+          const categoryId = paramMap.get(FilterBy.category) || undefined;
+          const brandId = paramMap.get(FilterBy.brand) || undefined;
+          const searchString = paramMap.get(FilterBy.search) || undefined;
 
-      this.productListService.getProductList(categoryId, brandId, searchString).subscribe(data => {
+          return this.productListService.getProductList(categoryId, brandId, searchString);
+        }),
+      )
+      .subscribe(data => {
         this.productList = data;
         this.productList = this.productListService.sortProductList(this.productList, this.sortBy);
       });
-    });
   }
 
   public onSortChange(sortBy: SortBy): void {

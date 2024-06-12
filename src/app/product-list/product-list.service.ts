@@ -10,7 +10,7 @@ import { SortBy } from './models/sort-by.enum';
 export class ProductListService {
   constructor(private http: HttpClient) {}
 
-  public getProductList(categoryId?: number, brandId?: number, searchString?: string): Observable<Product[]> {
+  public getProductList(categoryId?: string, brandId?: string, searchString?: string): Observable<Product[]> {
     let parameters = {};
     if (categoryId) {
       parameters = { category: categoryId };
