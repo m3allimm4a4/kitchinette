@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FilterBy } from '../models/filter-by.enum';
 import { Category } from '../../shared/models/category.interface';
-import { Brand } from '../../shared/models/brand.interface';
 import { InitializationService } from '../../shared/services/initialization/initialization.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class ProductListSidebarComponent implements OnInit {
   @Output() filter = new EventEmitter<FilterBy[]>();
 
   public categories: Category[] = [];
-  public brands: Brand[] = [];
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -28,10 +26,6 @@ export class ProductListSidebarComponent implements OnInit {
     this.initService.getAllCategories().subscribe(data => {
       this.categories = data;
     });
-
-    // this.initService.getAllBrands().subscribe(data => {
-    //   this.brands = data;
-    // });
   }
 
   public clearFilter() {
