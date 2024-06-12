@@ -57,7 +57,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id');
-      if (!id) return;
+      if (!id || id === 'new') return;
       this.productDetailsService.getProductDetails(id).subscribe(p => {
         this.form.patchValue({
           ...p,

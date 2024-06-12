@@ -37,7 +37,7 @@ export class OrderService {
     return this.http.get<Order[]>('/orders');
   }
 
-  public getOrder(orderId: number): Observable<Order> {
+  public getOrder(orderId: string): Observable<Order> {
     return this.http.get<Order>(`/orders/${orderId}`);
   }
 }

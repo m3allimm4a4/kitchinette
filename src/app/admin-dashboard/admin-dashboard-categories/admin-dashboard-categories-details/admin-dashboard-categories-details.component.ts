@@ -30,7 +30,7 @@ export class AdminDashboardCategoriesDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id')
-      if (!id) {
+      if (!id || id === 'new') {
         return;
       }
       this.isEditMode = true;

@@ -20,8 +20,8 @@ export class AdminDashboardOrdersDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      if (!id) return;
+      const id = params.get('id');
+      if (!id || id === 'new') return;
       this.orderService.getOrder(id).subscribe(order => {
         this.order = order;
       });
