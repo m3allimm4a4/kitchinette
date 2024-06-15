@@ -21,13 +21,17 @@
         </div>
         <div class="row">
           <ul class="pagination" style="display: flex">
-            <li class="page-item"><a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a></li>
+            <li class="page-item" [ngClass]="{ disabled: currentPage === 0 }">
+              <a class="page-link" (click)="onPageChange(currentPage - 1)">&laquo;</a>
+            </li>
             @for (pageNumber of pageNumbers; track pageNumber) {
-              <li class="page-item">
+              <li class="page-item" [ngClass]="{ active: pageNumber === currentPage }">
                 <a class="page-link" (click)="onPageChange(pageNumber)">{{ pageNumber + 1 }}</a>
               </li>
             }
-            <li class="page-item"><a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a></li>
+            <li class="page-item" [ngClass]="{ disabled: currentPage === pageNumber - 1 }">
+              <a class="page-link" (click)="onPageChange(currentPage + 1)">&raquo;</a>
+            </li>
           </ul>
         </div>
       </div>

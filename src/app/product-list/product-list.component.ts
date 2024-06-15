@@ -9,13 +9,20 @@ import { ProductCardComponent } from '../shared/components/product-card/product-
 import { ProductListSidebarComponent } from './product-list-sidebar/product-list-sidebar.component';
 import { ProductListTopbarComponent } from './product-list-topbar/product-list-topbar.component';
 import { switchMap } from 'rxjs';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
   standalone: true,
-  imports: [BreadcrumbsComponent, ProductCardComponent, ProductListSidebarComponent, ProductListTopbarComponent],
+  imports: [
+    BreadcrumbsComponent,
+    ProductCardComponent,
+    ProductListSidebarComponent,
+    ProductListTopbarComponent,
+    NgClass,
+  ],
 })
 export class ProductListComponent implements OnInit {
   public productList: Product[] = [];
