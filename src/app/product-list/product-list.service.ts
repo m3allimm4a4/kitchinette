@@ -52,4 +52,9 @@ export class ProductListService {
     }
     return products;
   }
+
+  public paginateProductList(productList: Product[], pageNumber: number, pageSize: number): Product[] {
+    const start = pageNumber * pageSize
+    return productList.slice(start, start + pageSize);
+  }
 }

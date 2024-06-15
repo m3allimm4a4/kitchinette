@@ -13,11 +13,22 @@
           </div>
         </div>
         <div class="row">
-          @for (product of productList; track product._id) {
+          @for (product of productListPage; track product._id) {
             <div class="col-lg-4 col-md-6 col-12">
               <app-product-card [product]="product"></app-product-card>
             </div>
           }
+        </div>
+        <div class="row">
+          <ul class="pagination" style="display: flex">
+            <li class="page-item"><a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a></li>
+            @for (pageNumber of pageNumbers; track pageNumber) {
+              <li class="page-item">
+                <a class="page-link" (click)="onPageChange(pageNumber)">{{ pageNumber + 1 }}</a>
+              </li>
+            }
+            <li class="page-item"><a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a></li>
+          </ul>
         </div>
       </div>
     </div>

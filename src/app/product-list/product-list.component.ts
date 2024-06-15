@@ -19,7 +19,13 @@ import { switchMap } from 'rxjs';
 })
 export class ProductListComponent implements OnInit {
   public productList: Product[] = [];
+  public productListPage: Product[] = [];
+  public pageNumbers: number[] = [];
+  public currentPage: number = 0;
+  public pageNumber: number = 0;
   public sortBy = SortBy.name;
+
+  private pageSize = 25;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,13 +44,26 @@ export class ProductListComponent implements OnInit {
         }),
       )
       .subscribe(data => {
-        this.productList = data;
-        this.productList = this.productListService.sortProductList(this.productList, this.sortBy);
+        this.productList = this.productListService.sortProductList(data, this.sortBy);
+        this.pageNumbers = this.getPageNumbers(data);
+        this.productListPage = this.productListService.paginateProductList(this.productList, 0, this.pageSize);
       });
   }
 
   public onSortChange(sortBy: SortBy): void {
     this.sortBy = sortBy;
     this.productList = this.productListService.sortProductList(this.productList, sortBy);
+  }
+
+  public onPageChange(pageNumber: number) {
+    if (this.currentPage !== pageNumber && pageNumber >= 0 && pageNumber < this.pageNumber) {
+      this.currentPage = pageNumber;
+      this.productListPage = this.productListService.paginateProductList(this.productList, pageNumber, this.pageSize);
+    }
+  }
+
+  private getPageNumbers(products: Product[]): number[] {
+    this.pageNumber = Math.ceil(products.length / this.pageSize);
+    return new Array(this.pageNumber).fill(0).map((_, i) => i);
   }
 }
