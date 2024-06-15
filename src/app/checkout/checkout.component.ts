@@ -61,7 +61,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   });
 
   public substotal = 0;
-  public shipping = 5;
+  public shipping = 4;
   public checkoutDisabled = false;
   public checkoutLoading = false;
   private subscription = new Subscription();

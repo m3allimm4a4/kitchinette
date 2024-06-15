@@ -15,7 +15,7 @@
     @for (item of cartItems; track item) {
       <tr>
         <td class="image" data-title="No">
-          <img [ngSrc]="item.product.imagePath" [alt]="item.product.name" fill />
+          <img [ngSrc]="item.product.imagePath" [alt]="item.product.name" width="80" height="80" />
         </td>
         <td class="product-des" data-title="Description">
           <p class="product-name">

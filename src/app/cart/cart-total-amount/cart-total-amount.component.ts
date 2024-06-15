@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class CartTotalAmountComponent implements OnInit {
   public subtotal = 0;
-  public shipping = 5;
+  public shipping = 4;
   private subscription = new Subscription();
 
   constructor(private cartService: CartService) {}

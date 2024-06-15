@@ -11,7 +11,7 @@ import { OrderService } from '../../../checkout/order.service';
 })
 export class AdminDashboardOrdersDetailsComponent implements OnInit {
   public order: Order = {} as Order;
-  public shipping = 5;
+  public shipping = 4;
 
   constructor(
     private activatedRoute: ActivatedRoute,
