@@ -6,17 +6,17 @@ import { NotFoundError } from '../errors/not-found.error';
 import { IOrder } from '../interfaces/order.interface';
 
 export const getOrders: RequestHandler = catchAsync(async (_req, res): Promise<void> => {
-  const orders = await Order.find();
-  res.status(200).json(orders);
+  const orders = await Order.find().populate('user');
+  res.status(200).json(orders.map(o => o.toObject()));
 });
 
 export const getOrder: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const id = req.params['id'];
   if (!id) throw new InvalidIdError();
 
-  const order = await Order.findById(id).populate('product');
+  const order = await Order.findById(id).populate('user');
   if (!order) throw new NotFoundError();
-  res.status(200).json(order);
+  res.status(200).json(order.toObject());
 });
 
 export const createOrder: RequestHandler = catchAsync(async (req, res): Promise<void> => {

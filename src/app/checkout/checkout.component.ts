@@ -16,6 +16,7 @@ import { ModalContentComponent } from '../shared/components/modal-content/modal-
 import { CartItem } from '../shared/models/cart-item.interface';
 import { OrderService } from './order.service';
 import { NgIf } from '@angular/common';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -46,15 +47,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.required, Validators.maxLength(100)],
     }),
-    address1: new FormControl('', {
+    address: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.maxLength(255)],
     }),
-    address2: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(255)],
-    }),
-    cartItems: new FormControl([] as CartItem[], {
+    cartItems: new FormControl<CartItem[]>([], {
       nonNullable: true,
       validators: [this.cartItemsValidator()],
     }),
@@ -71,6 +68,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private router: Router,
     private cartService: CartService,
     private checkoutService: OrderService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +80,20 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.cartService.getItems$().subscribe(items => {
         this.checkoutForm.controls.cartItems.setValue(items);
+      }),
+    );
+    this.subscription.add(
+      this.authService.getUser$().subscribe(user => {
+        if (!user) return;
+        this.checkoutForm.patchValue({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          city: user.city,
+          phone: user.phone,
+          address: user.address,
+        });
+        // this.checkoutForm.disable();
       }),
     );
   }

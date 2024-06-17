@@ -62,27 +62,14 @@
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
-                  <label>Address Line 1<span>*</span></label>
+                  <label>Address<span>*</span></label>
                   <input
                     type="text"
-                    formControlName="address1"
+                    formControlName="address"
                     required="required"
                     maxlength="255" />
                   <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input">
-                    Address line 1 required
-                  </small>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-12">
-                <div class="form-group">
-                  <label>Address Line 2<span>*</span></label>
-                  <input
-                    type="text"
-                    formControlName="address2"
-                    required="required"
-                    maxlength="255" />
-                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input">
-                    Address line 2 required
+                    Address required
                   </small>
                 </div>
               </div>
