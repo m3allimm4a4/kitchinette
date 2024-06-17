@@ -50,9 +50,11 @@ export class MiddleInnerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.initService.getAllCategories().subscribe(categories => {
-      this.categories = categories;
-    });
+    this.subscription.add(
+      this.initService.getAllCategories().subscribe(categories => {
+        this.categories = categories;
+      }),
+    );
 
     this.subscription.add(this.authService.getUser$().subscribe(user => (this.user = user)));
   }
@@ -74,6 +76,6 @@ export class MiddleInnerComponent implements OnInit, OnDestroy {
   }
 
   public logOut() {
-    this.authService.logOut()
+    this.authService.logOut();
   }
 }

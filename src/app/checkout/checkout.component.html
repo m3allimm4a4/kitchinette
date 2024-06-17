@@ -14,63 +14,43 @@
                     type="text"
                     formControlName="firstName"
                     required="required"
-                    maxlength="100" />
-                  <small *ngIf="displayInvalidFeedback('firstName')" class="invalid-input">
-                    First name required
-                  </small>
+                    maxlength="100"/>
+                  <small *ngIf="displayInvalidFeedback('firstName')" class="invalid-input"> First name required </small>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>Last Name<span>*</span></label>
-                  <input
-                    type="text"
-                    formControlName="lastName"
-                    required="required"
-                    maxlength="100" />
-                  <small *ngIf="displayInvalidFeedback('lastName')" class="invalid-input">
-                    Last name required
-                  </small>
+                  <input type="text" formControlName="lastName" required="required" maxlength="100" />
+                  <small *ngIf="displayInvalidFeedback('lastName')" class="invalid-input"> Last name required </small>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>Email Address<span>*</span></label>
                   <input type="email" formControlName="email" required="required" maxlength="100" />
-                  <small *ngIf="displayInvalidFeedback('email')" class="invalid-input">
-                    Invalid email
-                  </small>
+                  <small *ngIf="displayInvalidFeedback('email')" class="invalid-input"> Invalid email </small>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>Phone Number<span>*</span></label>
                   <input type="text" formControlName="phone" required="required" maxlength="100" />
-                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input">
-                    Phone number required
-                  </small>
+                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input"> Phone number required </small>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>City<span>*</span></label>
                   <input type="text" formControlName="city" required="required" maxlength="100" />
-                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input">
-                    City required
-                  </small>
+                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input"> City required </small>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>Address<span>*</span></label>
-                  <input
-                    type="text"
-                    formControlName="address"
-                    required="required"
-                    maxlength="255" />
-                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input">
-                    Address required
-                  </small>
+                  <input type="text" formControlName="address" required="required" maxlength="255" />
+                  <small *ngIf="displayInvalidFeedback('phone')" class="invalid-input"> Address required </small>
                 </div>
               </div>
             </div>

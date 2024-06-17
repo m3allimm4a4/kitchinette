@@ -93,7 +93,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           phone: user.phone,
           address: user.address,
         });
-        // this.checkoutForm.disable();
+        this.disableFields();
       }),
     );
   }
@@ -132,5 +132,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     return (control: AbstractControl): ValidationErrors | null => {
       return control.value.length ? null : { cartIsEmpty: true };
     };
+  }
+
+  private disableFields() {
+    this.checkoutForm.controls.firstName.disable();
+    this.checkoutForm.controls.lastName.disable();
+    this.checkoutForm.controls.email.disable();
+    this.checkoutForm.controls.phone.disable();
   }
 }
