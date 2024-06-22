@@ -1,0 +1,24 @@
+<section id="contact-us" class="contact-us section">
+  <div class="container">
+    <div class="contact-head">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-main">
+            <div class="title">
+              <h3>Email Verification</h3>
+            </div>
+            <div>
+              @if (isLoading) {
+                spinner
+              } @else if (verified) {
+                Email verified. You can now <a routerLink="/login" class="login-url">Log In</a>
+              } @else {
+                Error verifying email.
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

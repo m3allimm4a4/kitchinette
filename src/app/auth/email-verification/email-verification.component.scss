@@ -1,0 +1,7 @@
+.login-url {
+  color: rgba(var(--bs-link-color-rgb));
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

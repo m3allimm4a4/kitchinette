@@ -35,6 +35,10 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/sign-up/sign-up.component').then(m => m.SignUpComponent),
   },
   {
+    path: 'email-verification/:hash',
+    loadComponent: () => import('./auth/email-verification/email-verification.component').then(m => m.EmailVerificationComponent),
+  },
+  {
     path: 'admin-dashboard',
     loadChildren: () => import('./admin-dashboard/admin-dashboard-routes').then(m => m.ADMIN_DASHBOARD_ROUTES),
   },

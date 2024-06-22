@@ -6,6 +6,7 @@ import { UnauthorizedError } from '../errors/unauthorized.error';
 import { IUser, UserRole } from '../interfaces/user.interface';
 import { environment } from '../environments/environment';
 import { sendEmail } from '../shared/mail-sender';
+import { NotFoundError } from '../errors/not-found.error';
 
 export const login: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const { email, password } = req.body;
@@ -54,6 +55,20 @@ export const signUp: RequestHandler = catchAsync(async (req, res): Promise<void>
       return;
     }
     await sendEmail('Email verification', [user.email], html);
-    res.status(200);
+    res.status(200).send();
   });
+});
+
+export const verifyEmail: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const { hash } = req.body;
+  const user = await User.findOne({ verificationHash: hash });
+  if (!user) {
+    throw new NotFoundError();
+  }
+
+  user.verified = true;
+  user.verificationHash = '';
+  await user.save();
+
+  res.status(200).send();
 });

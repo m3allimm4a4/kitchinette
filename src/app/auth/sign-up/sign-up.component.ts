@@ -4,6 +4,9 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { UniqueEmailValidator } from '../../shared/validators/unique-email.validator';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { race, switchMap } from 'rxjs';
+import { ModalContentComponent } from '../../shared/components/modal-content/modal-content.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,6 +33,7 @@ export class SignUpComponent {
     private router: Router,
     private http: HttpClient,
     private authService: AuthService,
+    private modalService: NgbModal,
   ) {}
 
   public onSubmit() {
@@ -49,6 +53,14 @@ export class SignUpComponent {
         city: this.form.controls.city.value || '',
         roles: [],
       })
+      .pipe(
+        switchMap(() => {
+          const modalRef = this.modalService.open(ModalContentComponent);
+          modalRef.componentInstance.header = 'Email verification';
+          modalRef.componentInstance.body = 'An email has been sent to verify your email address';
+          return race(modalRef.closed, modalRef.dismissed);
+        }),
+      )
       .subscribe({
         next: () => this.router.navigate(['/']).then(),
       });

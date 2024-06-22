@@ -1,5 +1,5 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject, map, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, Subscription, timer } from 'rxjs';
 import { User, UserRole } from '../shared/models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { AuthReponse } from './models/auth-reponse.interface';
@@ -68,12 +68,13 @@ export class AuthService {
   }
 
   public signUp(user: User) {
-    return this.http.post<AuthReponse>('/auth/sign-up', user).pipe(
-      map(response => {
-        const expiryDate = Date.now() + response.expiresIn;
-        this.setAuthData(response.user, response.accessToken, expiryDate);
-        return response.user;
-      }),
+    return this.http.post<undefined>('/auth/sign-up', user);
+  }
+
+  public verifyEmail(hash: string) {
+    return this.http.post<undefined>('/auth/verify-email', { hash: hash }).pipe(
+      map(() => true),
+      catchError(() => of(false)),
     );
   }
 

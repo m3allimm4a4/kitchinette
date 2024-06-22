@@ -11,7 +11,7 @@ export const UserSchema = new Schema<IUser>(
     password: { type: String, required: true },
     phone: { type: String, required: true },
     verified: { type: Boolean, default: false },
-    verificationHash: { type: String, required: true },
+    verificationHash: { type: String },
     roles: [{ type: String, enum: Object.values(UserRole) }],
   },
   { timestamps: true },
