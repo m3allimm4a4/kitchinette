@@ -1,6 +1,8 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import { engine } from 'express-handlebars';
 import { environment } from './environments/environment';
 import { bannersRoutes } from './routes/bannersRoutes';
 import { sliderRoutes } from './routes/sliderRoutes';
@@ -12,7 +14,7 @@ import { NotFoundError } from './errors/not-found.error';
 import { authRoutes } from './routes/authRoutes';
 import { auth } from './middlewares/auth.middleware';
 import { UserRole } from './interfaces/user.interface';
-import cors from 'cors';
+import { validationRoutes } from './routes/validationRoutes';
 
 const run = async (): Promise<void> => {
   const server = express();
@@ -30,6 +32,9 @@ const run = async (): Promise<void> => {
       responseOnLimit: 'Files cannot be larger than 100 mb',
     }),
   );
+  server.engine('handlebars', engine());
+  server.set('view engine', 'handlebars');
+  server.set('views', './templates');
 
   // Express Rest API
   server.use('/api/banners', bannersRoutes);
@@ -38,6 +43,7 @@ const run = async (): Promise<void> => {
   server.use('/api/products', productsRoutes);
   server.use('/api/orders', auth([UserRole.NORMAL]), ordersRoutes);
   server.use('/api/auth', authRoutes);
+  server.use('/api/validation', validationRoutes);
 
   server.use('/images', express.static(environment.imagesPath));
 

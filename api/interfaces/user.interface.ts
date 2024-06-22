@@ -8,6 +8,8 @@ export interface IUser extends IEntity {
   city: string;
   address: string;
   password: string;
+  verified: boolean;
+  verificationHash: string;
   roles: UserRole[];
 }
 

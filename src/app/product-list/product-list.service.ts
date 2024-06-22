@@ -54,7 +54,7 @@ export class ProductListService {
   }
 
   public paginateProductList(productList: Product[], pageNumber: number, pageSize: number): Product[] {
-    const start = pageNumber * pageSize
+    const start = pageNumber * pageSize;
     return productList.slice(start, start + pageSize);
   }
 }

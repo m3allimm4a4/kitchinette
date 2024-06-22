@@ -58,9 +58,7 @@
                     type="file"
                     formControlName="mainImage"
                     (change)="onFileChange($event, 'mainImageFile')" />
-                  <small *ngIf="displayInvalidFeedback('category')" class="invalid-input">
-                    Main image required
-                  </small>
+                  <small *ngIf="displayInvalidFeedback('category')" class="invalid-input"> Main image required </small>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">

@@ -1,4 +1,3 @@
-
 export interface ShareLink {
   name: string;
   url: string;

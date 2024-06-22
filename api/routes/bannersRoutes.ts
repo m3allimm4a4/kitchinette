@@ -5,7 +5,10 @@ import { UserRole } from '../interfaces/user.interface';
 
 const router = Router();
 
-router.route('/').get(getBanners).post(auth([UserRole.ADMIN]),createBanner);
+router
+  .route('/')
+  .get(getBanners)
+  .post(auth([UserRole.ADMIN]), createBanner);
 router
   .route('/:id')
   .get(getBanner)

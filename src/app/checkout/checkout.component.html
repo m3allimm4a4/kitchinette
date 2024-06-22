@@ -10,11 +10,7 @@
               <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>First Name<span>*</span></label>
-                  <input
-                    type="text"
-                    formControlName="firstName"
-                    required="required"
-                    maxlength="100"/>
+                  <input type="text" formControlName="firstName" required="required" maxlength="100" />
                   <small *ngIf="displayInvalidFeedback('firstName')" class="invalid-input"> First name required </small>
                 </div>
               </div>

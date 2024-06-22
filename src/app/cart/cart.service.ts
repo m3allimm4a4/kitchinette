@@ -35,7 +35,7 @@ export class CartService {
         return cartItems.reduce((sum, currentCartItem) => {
           return sum + currentCartItem.quantity * currentCartItem.product.price;
         }, 0);
-      })
+      }),
     );
   }
 
@@ -78,9 +78,7 @@ export class CartService {
   private updateCart(items: CartItem[]): void {
     if (isPlatformBrowser(this.platformId)) {
       this.cartItems$.next(items);
-      items.length
-        ? localStorage.setItem(this.cartKey, JSON.stringify(items))
-        : localStorage.removeItem(this.cartKey);
+      items.length ? localStorage.setItem(this.cartKey, JSON.stringify(items)) : localStorage.removeItem(this.cartKey);
     }
   }
 }

@@ -45,4 +45,3 @@ export const ADMIN_DASHBOARD_ROUTES: Routes = [
     ],
   },
 ];
-

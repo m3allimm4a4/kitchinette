@@ -1,11 +1,13 @@
 import {
-  port,
-  production,
+  bcryptSaltRounds,
+  brevoApiKey,
   databaseUrl,
   imagesPath,
-  jwtSecret,
   jwtExpiry,
-  bcryptSaltRounds,
+  jwtSecret,
+  port,
+  production,
+  senderEmail,
 } from './environment.development';
 
 export const environment = {
@@ -16,4 +18,6 @@ export const environment = {
   jwtSecret: process.env['jwtSecret'] || jwtSecret,
   jwtExpiry: process.env['jwtExpiry'] || jwtExpiry,
   bcryptSaltRounds: process.env['bcryptSaltRounds'] || bcryptSaltRounds,
+  brevoApiKey: process.env['brevoApiKey'] || brevoApiKey,
+  senderEmail: process.env['senderEmail'] || senderEmail,
 };

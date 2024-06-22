@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UniqueEmailValidator } from '../../shared/validators/unique-email.validator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +14,10 @@ import { AuthService } from '../auth.service';
 })
 export class SignUpComponent {
   public form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+      asyncValidators: [UniqueEmailValidator.create(this.http)],
+    }),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -23,6 +28,7 @@ export class SignUpComponent {
 
   constructor(
     private router: Router,
+    private http: HttpClient,
     private authService: AuthService,
   ) {}
 
@@ -45,7 +51,6 @@ export class SignUpComponent {
       })
       .subscribe({
         next: () => this.router.navigate(['/']).then(),
-        error: error => {},
       });
   }
 }

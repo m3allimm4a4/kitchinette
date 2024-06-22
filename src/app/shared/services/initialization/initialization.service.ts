@@ -22,7 +22,7 @@ export class InitializationService {
       switchMap(categories => {
         this.categories$.next(categories);
         return this.categories$.pipe(take(1));
-      })
+      }),
     );
   }
 
@@ -36,7 +36,7 @@ export class InitializationService {
           return category;
         }
         throw new Error('Category not found');
-      })
+      }),
     );
   }
 
@@ -54,7 +54,7 @@ export class InitializationService {
       switchMap(brands => {
         this.brands$.next(brands);
         return this.brands$.pipe(take(1));
-      })
+      }),
     );
   }
 }
