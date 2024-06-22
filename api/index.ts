@@ -34,7 +34,7 @@ const run = async (): Promise<void> => {
   );
   server.engine('handlebars', engine());
   server.set('view engine', 'handlebars');
-  server.set('views', './templates');
+  server.set('views', __dirname + '/templates');
 
   // Express Rest API
   server.use('/api/banners', bannersRoutes);

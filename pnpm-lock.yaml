@@ -42,8 +42,8 @@ importers:
         specifier: ^17.2.3
         version: 17.2.3(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))
       '@getbrevo/brevo':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: ^2.2.0
+        version: 2.2.0
       '@ng-bootstrap/ng-bootstrap':
         specifier: ^16.0.0
         version: 16.0.0(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(@angular/forms@17.2.4(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(@angular/platform-browser@17.2.4(@angular/animations@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4)))(@angular/common@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4)))(rxjs@7.8.1))(@angular/localize@17.2.4(@angular/compiler-cli@17.2.4(@angular/compiler@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4)))(typescript@5.3.3))(@angular/compiler@17.2.4(@angular/core@17.2.4(rxjs@7.8.1)(zone.js@0.14.4))))(@popperjs/core@2.11.8)(rxjs@7.8.1)
@@ -1288,8 +1288,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@getbrevo/brevo@2.1.1':
-    resolution: {integrity: sha512-x2CS9yYl40kLxfZ4U5fBWFN8VI5pGZ/CkQlNsscnIICJdxQmtYVo+cI4cwshMmmr/aCwai7dOS+3zjMZ6GKTyQ==}
+  '@getbrevo/brevo@2.2.0':
+    resolution: {integrity: sha512-mNCkXtgqn6jqLglAx1JzZcTj53kBZ5dK9Yd6zVuEyXAvhz68f5Ps6dSJar9HvkHH0Lfr3NrqW76xurjcoxqhIg==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -6309,7 +6309,7 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@getbrevo/brevo@2.1.1':
+  '@getbrevo/brevo@2.2.0':
     dependencies:
       bluebird: 3.7.2
       request: 2.88.2

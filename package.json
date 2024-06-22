@@ -25,7 +25,7 @@
     "@angular/platform-server": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@angular/ssr": "^17.2.3",
-    "@getbrevo/brevo": "^2.1.1",
+    "@getbrevo/brevo": "^2.2.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@types/cors": "^2.8.17",
     "bcrypt": "^5.1.1",

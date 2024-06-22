@@ -49,7 +49,9 @@ export const signUp: RequestHandler = catchAsync(async (req, res): Promise<void>
   };
   res.render('email-verification', params, async (err, html) => {
     if (err) {
-      throw new Error();
+      console.error(err);
+      res.status(500).send('Something went wrong. Try again later.');
+      return;
     }
     await sendEmail('Email verification', [user.email], html);
     res.status(200);
