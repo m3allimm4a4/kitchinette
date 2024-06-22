@@ -9,7 +9,7 @@ import { sendEmail } from '../shared/mail-sender';
 
 export const login: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email: email, verified: true });
   if (!user) {
     throw new UnauthorizedError();
   }
