@@ -22,10 +22,11 @@ export class OrderService {
     }
     const subtotal = this.cartService.getTotalAmount();
     const discount = 0;
+    const shipping = 4
     const newOrder: Order = {
       _id: '',
       subtotal: subtotal,
-      total: subtotal - discount,
+      total: subtotal - discount + shipping,
       discount: discount,
       products: this.cartService.getItems(),
       user: user,

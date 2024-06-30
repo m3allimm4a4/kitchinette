@@ -36,7 +36,8 @@ export const routes: Routes = [
   },
   {
     path: 'email-verification/:hash',
-    loadComponent: () => import('./auth/email-verification/email-verification.component').then(m => m.EmailVerificationComponent),
+    loadComponent: () =>
+      import('./auth/email-verification/email-verification.component').then(m => m.EmailVerificationComponent),
   },
   {
     path: 'admin-dashboard',

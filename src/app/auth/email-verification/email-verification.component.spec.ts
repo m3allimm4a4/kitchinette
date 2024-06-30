@@ -8,10 +8,9 @@ describe('EmailVerificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmailVerificationComponent]
-    })
-    .compileComponents();
-    
+      imports: [EmailVerificationComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(EmailVerificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

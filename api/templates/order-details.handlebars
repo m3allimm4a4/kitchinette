@@ -1,0 +1,76 @@
+<section class='shop checkout section' style="color: black">
+  <div class='col-lg-8 col-12'>
+    <div class='checkout-form'>
+      <h2>Order #{{_id}}</h2>
+      <p></p>
+      <div class='row'>
+        <div class='col-lg-6 col-md-6 col-12'>
+          <div class='form-group'>First Name: {{user.firstName}}</div>
+        </div>
+        <div class='col-lg-6 col-md-6 col-12'>
+          <div class='form-group'>Last Name: {{user.lastName}}</div>
+        </div>
+        <div class='col-lg-6 col-md-6 col-12'>
+          <div class='form-group'>Email Address: {{user.email}}</div>
+        </div>
+        <div class='col-lg-6 col-md-6 col-12'>
+          <div class='form-group'>Phone Number: {{user.phone}}</div>
+        </div>
+        <div class='col-lg-6 col-md-6 col-12'>
+          <div class='form-group'>City: {{user.city}}</div>
+        </div>
+        <div class='col-lg-6 col-md-6 col-12'>
+          <div class='form-group'>Address: {{user.address}}</div>
+        </div>
+        <div class='col-12'>
+          <p>Items</p>
+          <table class='table table-striped'>
+            <thead>
+            <tr>
+              <th scope='col'>Name</th>
+              <th scope='col'>Quantity</th>
+              <th scope='col'>Unit Price</th>
+              <th scope='col'>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each products}}
+              <tr>
+                <td>{{this.product.name}}</td>
+                <td>{{this.quantity}}</td>
+                <td>{{this.product.price}}</td>
+                <td>{{this.quantity}}</td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-lg-4 col-12'>
+    <div class='order-details'>
+      <div class='single-widget'>
+        <h2>CART TOTALS</h2>
+        <div class='content'>
+          <div>Sub Total: {{subtotal}}$</div>
+          <div>(+) Shipping: 4$</div>
+          <div class='last'>Total: {{total}}$</div>
+        </div>
+      </div>
+
+      <div class='single-widget'>
+        <h2>Payments</h2>
+        <div class='content'>
+          <div class='checkbox'>
+            <label class='checkbox-inline checked' for='2'>
+              <input name='news' id='2' type='radio' checked />
+              Cash On Delivery
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
