@@ -15,6 +15,7 @@ import { authRoutes } from './routes/authRoutes';
 import { auth } from './middlewares/auth.middleware';
 import { UserRole } from './interfaces/user.interface';
 import { validationRoutes } from './routes/validationRoutes';
+import { contactUsRoutes } from './routes/contectUsRoutes';
 
 const run = async (): Promise<void> => {
   const server = express();
@@ -44,6 +45,7 @@ const run = async (): Promise<void> => {
   server.use('/api/orders', auth([UserRole.NORMAL]), ordersRoutes);
   server.use('/api/auth', authRoutes);
   server.use('/api/validation', validationRoutes);
+  server.use('/api/contact-us', contactUsRoutes);
 
   server.use('/images', express.static(environment.imagesPath));
 

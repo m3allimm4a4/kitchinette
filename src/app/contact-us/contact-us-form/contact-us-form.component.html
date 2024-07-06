@@ -1,38 +1,38 @@
-<form class="form">
+<form class="form" [formGroup]="form">
   <div class="row">
     <div class="col-lg-6 col-12">
       <div class="form-group">
         <label>Your Name<span>*</span></label>
-        <input name="name" type="text" placeholder="" />
+        <input formControlName="name" name="name" type="text" placeholder="" />
       </div>
     </div>
     <div class="col-lg-6 col-12">
       <div class="form-group">
-        <label>Your Subjects<span>*</span></label>
-        <input name="subject" type="text" placeholder="" />
+        <label>Your Subject<span>*</span></label>
+        <input formControlName="subject" name="subject" type="text" placeholder="" />
       </div>
     </div>
     <div class="col-lg-6 col-12">
       <div class="form-group">
         <label>Your Email<span>*</span></label>
-        <input name="email" type="email" placeholder="" />
+        <input formControlName="email" name="email" type="email" placeholder="" />
       </div>
     </div>
     <div class="col-lg-6 col-12">
       <div class="form-group">
         <label>Your Phone<span>*</span></label>
-        <input name="company_name" type="text" placeholder="" />
+        <input formControlName="phone" name="company_name" type="text" placeholder="" />
       </div>
     </div>
     <div class="col-12">
       <div class="form-group message">
         <label>Your message<span>*</span></label>
-        <textarea name="message" placeholder=""></textarea>
+        <textarea formControlName="message" name="message" placeholder=""></textarea>
       </div>
     </div>
     <div class="col-12">
       <div class="form-group button">
-        <button type="button" class="btn">Send Message</button>
+        <button type="button" class="btn" (click)="onSubmit()">Send Message</button>
       </div>
     </div>
   </div>
