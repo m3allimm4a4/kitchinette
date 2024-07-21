@@ -16,6 +16,7 @@ import { auth } from './middlewares/auth.middleware';
 import { UserRole } from './interfaces/user.interface';
 import { validationRoutes } from './routes/validationRoutes';
 import { contactUsRoutes } from './routes/contectUsRoutes';
+import { colorsRoutes } from './routes/colorsRoutes';
 
 const run = async (): Promise<void> => {
   const server = express();
@@ -41,6 +42,7 @@ const run = async (): Promise<void> => {
   server.use('/api/banners', bannersRoutes);
   server.use('/api/slider', sliderRoutes);
   server.use('/api/categories', categoriesRoutes);
+  server.use('/api/colors', colorsRoutes);
   server.use('/api/products', productsRoutes);
   server.use('/api/orders', auth([UserRole.NORMAL]), ordersRoutes);
   server.use('/api/auth', authRoutes);

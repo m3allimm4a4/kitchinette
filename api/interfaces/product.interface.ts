@@ -1,5 +1,6 @@
 import { IEntity } from './entity.interface';
 import { ICategory } from './category.interface';
+import { IColor } from './color.interface';
 
 export interface IProduct extends IEntity {
   name: string;
@@ -10,5 +11,6 @@ export interface IProduct extends IEntity {
   description: string;
   trending: boolean;
   category: ICategory;
+  colors: IColor[];
   oldPrice?: number;
 }

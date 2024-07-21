@@ -1,6 +1,7 @@
 import { IEntity } from './entity.interface';
 import { IUser } from './user.interface';
 import { IProduct } from './product.interface';
+import { IColor } from './color.interface';
 
 export interface IOrder extends IEntity {
   user: IUser;
@@ -13,4 +14,5 @@ export interface IOrder extends IEntity {
 export interface IOrderProduct {
   product: IProduct;
   quantity: number;
+  color: IColor;
 }

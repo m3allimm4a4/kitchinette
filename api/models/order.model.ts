@@ -2,6 +2,7 @@ import { model, Schema } from 'mongoose';
 import { IOrder } from '../interfaces/order.interface';
 import { ProductSchema } from './product.model';
 import { User } from './user.model';
+import { ColorSchema } from './color.model';
 
 export const OrderSchema = new Schema<IOrder>(
   {
@@ -11,6 +12,7 @@ export const OrderSchema = new Schema<IOrder>(
     products: [
       {
         quantity: { type: Number, required: true },
+        color: ColorSchema,
         product: ProductSchema,
       },
     ],

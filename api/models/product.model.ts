@@ -1,6 +1,7 @@
 import { model, Schema, Types } from 'mongoose';
 import { IProduct } from '../interfaces/product.interface';
 import { Category } from './category.model';
+import { Color } from './color.model';
 
 export const ProductSchema = new Schema<IProduct>(
   {
@@ -13,6 +14,7 @@ export const ProductSchema = new Schema<IProduct>(
     price: { type: Number, required: true },
     oldPrice: { type: Number },
     category: { type: Types.ObjectId, ref: Category },
+    colors: [{ type: Types.ObjectId, ref: Color }],
   },
   { timestamps: true },
 );

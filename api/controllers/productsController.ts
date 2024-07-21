@@ -21,14 +21,14 @@ export const getProducts: RequestHandler = catchAsync(async (req, res): Promise<
     query = query.sort({ createdAt: 'desc' }).limit(3);
   }
 
-  const products = await query.populate('category');
+  const products = await query.populate('category').populate('colors');
   res.status(200).json(products);
 });
 
 export const getProduct: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const id = req.params['id'];
   if (!id) throw new InvalidIdError();
-  const product = await Product.findById(id).populate('category');
+  const product = await Product.findById(id).populate('category').populate('colors');
   if (!product) throw new NotFoundError();
   res.status(200).json(product);
 });
@@ -66,6 +66,7 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
       description: req.body.description,
       trending: req.body.trending === 'true',
       category: req.body.category,
+      color: req.body.color,
     });
     res.status(200).json(newProduct);
   } catch (error) {
