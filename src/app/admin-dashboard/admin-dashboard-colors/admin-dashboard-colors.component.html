@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (category of colors; track category._id) {
+        <tr>
+          <th scope="row">{{ category._id }}</th>
+          <td>{{ category.name }}</td>
+          <td>
+            <a [routerLink]="[category._id]" [relativeTo]="activatedRoute">
+              <i class="pi pi-pencil"></i>
+            </a>
+            <a [routerLink]="[]" (click)="deleteColor(category)">
+              <i class="pi pi-trash"></i>
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <button class="btn" [routerLink]="['new']" [relativeTo]="activatedRoute">Add</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

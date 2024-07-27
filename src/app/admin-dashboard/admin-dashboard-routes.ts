@@ -7,6 +7,10 @@ import { AdminDashboardOrdersComponent } from './admin-dashboard-orders/admin-da
 import { AdminDashboardProductsDetailsComponent } from './admin-dashboard-products/admin-dashboard-products-details/admin-dashboard-products-details.component';
 import { AdminDashboardProductsComponent } from './admin-dashboard-products/admin-dashboard-products.component';
 import { AdminDashboardComponent } from './admin-dashboard.component';
+import { AdminDashboardColorsComponent } from './admin-dashboard-colors/admin-dashboard-colors.component';
+import {
+  AdminDashboardColorsDetailsComponent
+} from './admin-dashboard-colors/admin-dashboard-colors-details/admin-dashboard-colors-details.component';
 
 export const ADMIN_DASHBOARD_ROUTES: Routes = [
   {
@@ -25,6 +29,14 @@ export const ADMIN_DASHBOARD_ROUTES: Routes = [
       {
         path: 'categories/:id',
         component: AdminDashboardCategoriesDetailsComponent,
+      },
+      {
+        path: 'colors',
+        component: AdminDashboardColorsComponent,
+      },
+      {
+        path: 'colors/:id',
+        component: AdminDashboardColorsDetailsComponent,
       },
       {
         path: 'orders',

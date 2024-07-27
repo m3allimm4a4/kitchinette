@@ -1,5 +1,6 @@
 import { Category } from './category.interface';
 import { Entity } from './entity.interface';
+import { Color } from './color.interface';
 
 export interface Product extends Entity {
   name: string;
@@ -10,6 +11,7 @@ export interface Product extends Entity {
   description: string;
   trending: boolean;
   category: Category;
+  colors: Color[];
   oldPrice?: number;
 }
 

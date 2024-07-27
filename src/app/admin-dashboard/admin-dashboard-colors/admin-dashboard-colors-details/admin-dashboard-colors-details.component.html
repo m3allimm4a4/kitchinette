@@ -1,0 +1,37 @@
+<section id="contact-us" class="contact-us section">
+  <div class="container">
+    <div class="contact-head">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-main">
+            <form class="form">
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Name<span>*</span></label>
+                    <input name="name" type="text" [(ngModel)]="color.name" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Code<span>*</span></label>
+                    <div>
+                      <p-colorPicker [style]="{ width: '10px' }" name="code" [(ngModel)]="color.code"></p-colorPicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12" style="padding-top: 7px">
+                  <div class="form-group button">
+                    <button type="submit" class="btn btn-secondary" (click)="onSubmit()">
+                      {{ isEditMode ? 'Edit' : 'Add' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

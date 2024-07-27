@@ -8,6 +8,13 @@ export const getColors: RequestHandler = catchAsync(async (_req, res): Promise<v
   res.status(200).json(colors);
 });
 
+export const getColor: RequestHandler = catchAsync(async (req, res): Promise<void> => {
+  const id = req.params['id'];
+  if (!id) throw new InvalidIdError();
+  const colors = await Color.findById(id);
+  res.status(200).json(colors);
+});
+
 export const deleteColor: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const id = req.params['id'];
   if (!id) throw new InvalidIdError();
