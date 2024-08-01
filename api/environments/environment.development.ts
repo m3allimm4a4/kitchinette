@@ -6,3 +6,5 @@ export const imagesPath = 'D:\\Personal Projects\\kitchinette\\images';
 export const jwtSecret = 'S7ArHEVc9ZX3eAeeSLDymE7var97yhuJ4VSTNoivXk9LKH997nNZxmhfMyK3kMdf';
 export const jwtExpiry = 86400000;
 export const bcryptSaltRounds = 10;
+export const senderEmail = 'kitchinette.lb@hotmail.com'
+export const brevoApiKey = ''
