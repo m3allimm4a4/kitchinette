@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, filter, map, Observable, switchMap, take } from 'rxjs';
 import { Brand } from '../../models/brand.interface';
 import { Category } from '../../models/category.interface';
+import { Color } from '../../models/color.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -56,5 +57,9 @@ export class InitializationService {
         return this.brands$.pipe(take(1));
       }),
     );
+  }
+
+  public getAllColors() {
+    return this.http.get<Color[]>(`/colors`);
   }
 }

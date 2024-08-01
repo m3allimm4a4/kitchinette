@@ -6,13 +6,15 @@ import { ProductDetailsService } from '../../../product-details/product-details.
 import { InitializationService } from '../../../shared/services/initialization/initialization.service';
 import { ProductCreate } from '../../../shared/models/product.interface';
 import { NgIf } from '@angular/common';
+import { Color } from '../../../shared/models/color.interface';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-admin-dashboard-products-details',
   templateUrl: './admin-dashboard-products-details.component.html',
   styleUrls: ['./admin-dashboard-products-details.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, MultiSelectModule],
 })
 export class AdminDashboardProductsDetailsComponent implements OnInit {
   public form = new FormGroup({
@@ -33,6 +35,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
       validators: [Validators.required, Validators.maxLength(500)],
     }),
     category: new FormControl<Category | null>(null),
+    colors: new FormControl<Color[]>([], { nonNullable: true, validators: [Validators.required] }),
     trending: new FormControl(false, {
       nonNullable: true,
     }),
@@ -45,6 +48,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
   });
   public isEditMode = false;
   public categories: Category[] = [];
+  public colors: Color[] = [];
   private id = '';
 
   constructor(
@@ -75,6 +79,9 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
       this.categories = c;
       this.form.controls.category.setValue(c[0]);
     });
+    this.initializationService.getAllColors().subscribe(c => {
+      this.colors = c;
+    });
   }
 
   public onSubmit(): void {
@@ -87,6 +94,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
       trending: this.form.controls.trending.value,
       description: this.form.controls.description.value,
       category: this.form.controls.category.value._id,
+      colors: this.form.controls.colors.value.map(c => c._id),
       mainImage: this.form.controls.mainImageFile.value,
       cardImage: this.form.controls.cardImageFile.value,
       cardHoverImage: this.form.controls.cardHoverImageFile.value,

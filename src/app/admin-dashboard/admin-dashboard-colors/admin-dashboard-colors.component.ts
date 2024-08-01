@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Color } from '../../shared/models/color.interface';
 import { switchMap, tap } from 'rxjs';
+import { InitializationService } from '../../shared/services/initialization/initialization.service';
 
 @Component({
   selector: 'app-admin-dashboard-colors',
@@ -17,6 +18,7 @@ export class AdminDashboardColorsComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     public http: HttpClient,
+    private initializationService: InitializationService,
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class AdminDashboardColorsComponent implements OnInit {
   }
 
   private refreshColors() {
-    return this.http.get<Color[]>(`/colors`).pipe(
+    return this.initializationService.getAllColors().pipe(
       tap(colors => {
         this.colors = colors;
       }),

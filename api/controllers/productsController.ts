@@ -117,7 +117,7 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
     product.description = req.body.description;
     product.trending = req.body.trending;
     product.category = req.body.category;
-    product.colors = req.body.colors;
+    product.colors = JSON.parse(req.body.colors);
     const oldProduct = await product.save();
     res.status(200).json(oldProduct);
   } catch (error) {

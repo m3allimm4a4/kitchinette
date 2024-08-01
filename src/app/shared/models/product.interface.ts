@@ -25,4 +25,5 @@ export interface ProductCreate {
   cardHoverImage: File;
   trending: boolean;
   category: string;
+  colors: string[];
 }

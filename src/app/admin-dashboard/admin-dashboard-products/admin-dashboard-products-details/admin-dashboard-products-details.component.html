@@ -51,6 +51,16 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
+                <div>
+                  <label>Colors<span>*</span></label>
+                  <p-multiSelect
+                    formControlName="colors"
+                    optionLabel="name"
+                    [options]="colors"></p-multiSelect>
+                  <small *ngIf="displayInvalidFeedback('colors')" class="invalid-input"> Minimum old price is 0 </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-group">
                   <label>Main Image<span>*</span></label>
                   <input
