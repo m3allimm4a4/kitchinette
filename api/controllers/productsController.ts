@@ -82,8 +82,6 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
 export const updateProduct: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const id = req.params['id'];
   if (!id) throw new InvalidIdError();
-  if (!req.files) throw new Error('Images are missing images');
-  if (Object.keys(req.files).length < 3) throw new Error('Some images are missing');
 
   const product = await Product.findById(id);
   if (!product) throw new NotFoundError();
@@ -94,33 +92,46 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
     deleteImageFile(getImageName(product.hoverImagePath)),
   ]);
 
-  const mainImage = req.files['mainImage'] as UploadedFile;
-  const cardImage = req.files['cardImage'] as UploadedFile;
-  const cardHoverImage = req.files['cardHoverImage'] as UploadedFile;
+  let mainImageName = '';
+  let cardImageName = '';
+  let cardHoverImageName = '';
+  if (req.files) {
+    const mainImage = req.files['mainImage'] as UploadedFile;
+    const cardImage = req.files['cardImage'] as UploadedFile;
+    const cardHoverImage = req.files['cardHoverImage'] as UploadedFile;
 
-  const [mainImageName, cardImageName, cardHoverImageName] = await Promise.all([
-    saveUploadedFile(mainImage),
-    saveUploadedFile(cardImage),
-    saveUploadedFile(cardHoverImage),
-  ]);
+    if (mainImage) {
+      mainImageName = await saveUploadedFile(mainImage);
+      product.imagePath = mainImageName;
+    }
+    if (cardImage) {
+      cardImageName = await saveUploadedFile(cardImage);
+      product.mainImagePath = cardImageName;
+    }
+    if (cardHoverImage) {
+      cardHoverImageName = await saveUploadedFile(cardHoverImage);
+      product.hoverImagePath = cardHoverImageName;
+    }
+  }
 
   try {
     product.name = req.body.name;
     product.price = +req.body.price;
-    product.imagePath = mainImageName;
-    product.mainImagePath = cardImageName;
-    product.hoverImagePath = cardHoverImageName;
     product.description = req.body.description;
     product.trending = req.body.trending;
     product.category = req.body.category;
     const oldProduct = await product.save();
     res.status(200).json(oldProduct);
   } catch (error) {
-    await Promise.all([
-      deleteImageFile(mainImageName),
-      deleteImageFile(cardImageName),
-      deleteImageFile(cardHoverImageName),
-    ]);
+    if (mainImageName) {
+      await deleteImageFile(mainImageName)
+    }
+    if (cardImageName) {
+      await deleteImageFile(cardImageName);
+    }
+    if (cardHoverImageName) {
+      await deleteImageFile(cardHoverImageName);
+    }
     throw error;
   }
 });

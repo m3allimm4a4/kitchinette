@@ -36,11 +36,11 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
     trending: new FormControl(false, {
       nonNullable: true,
     }),
-    mainImage: new FormControl('', [Validators.required]),
+    mainImage: new FormControl(''),
     mainImageFile: new FormControl(),
-    cardImage: new FormControl('', [Validators.required]),
+    cardImage: new FormControl(''),
     cardImageFile: new FormControl(),
-    cardHoverImage: new FormControl('', [Validators.required]),
+    cardHoverImage: new FormControl(''),
     cardHoverImageFile: new FormControl(),
   });
   public isEditMode = false;
@@ -57,7 +57,12 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id');
-      if (!id || id === 'new') return;
+      if (!id || id === 'new') {
+        this.form.controls.mainImage.addValidators(Validators.required);
+        this.form.controls.cardImage.addValidators(Validators.required);
+        this.form.controls.cardHoverImage.addValidators(Validators.required);
+        return;
+      }
       this.productDetailsService.getProductDetails(id).subscribe(p => {
         this.form.patchValue({
           ...p,
