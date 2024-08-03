@@ -65,6 +65,7 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
       hoverImagePath: cardHoverImageName,
       description: req.body.description,
       trending: req.body.trending === 'true',
+      outOfStock: req.body.outOfStock === 'true',
       category: req.body.category,
       colors: req.body.colors,
     });
@@ -115,7 +116,8 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
     product.name = req.body.name;
     product.price = +req.body.price;
     product.description = req.body.description;
-    product.trending = req.body.trending;
+    product.trending = req.body.trending === 'true';
+    product.outOfStock = req.body.outOfStock === 'true';
     product.category = req.body.category;
     product.colors = JSON.parse(req.body.colors);
     const oldProduct = await product.save();

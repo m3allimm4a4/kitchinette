@@ -11,6 +11,7 @@ export const ProductSchema = new Schema<IProduct>(
     hoverImagePath: { type: String, required: true },
     mainImagePath: { type: String, required: true },
     trending: { type: Boolean, required: true },
+    outOfStock: { type: Boolean, required: true },
     price: { type: Number, required: true },
     oldPrice: { type: Number },
     category: { type: Types.ObjectId, ref: Category },

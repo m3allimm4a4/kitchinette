@@ -26,7 +26,8 @@ export class ProductDetailsService {
     formData.set('mainImage', product.mainImage);
     formData.set('cardImage', product.cardImage);
     formData.set('cardHoverImage', product.cardHoverImage);
-    formData.set('trending', `${product.trending ? 1 : 0}`);
+    formData.set('trending', `${product.trending}`);
+    formData.set('outOfStock', `${product.outOfStock}`);
     formData.set('category', product.category);
     formData.set('colors', JSON.stringify(product.colors));
     return iif(

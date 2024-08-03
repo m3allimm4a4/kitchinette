@@ -39,6 +39,9 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
     trending: new FormControl(false, {
       nonNullable: true,
     }),
+    outOfStock: new FormControl(false, {
+      nonNullable: true,
+    }),
     mainImage: new FormControl(''),
     mainImageFile: new FormControl(),
     cardImage: new FormControl(''),
@@ -92,6 +95,7 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
       price: this.form.controls.price.value,
       oldPrice: this.form.controls.oldPrice.value,
       trending: this.form.controls.trending.value,
+      outOfStock: this.form.controls.outOfStock.value,
       description: this.form.controls.description.value,
       category: this.form.controls.category.value._id,
       colors: this.form.controls.colors.value.map(c => c._id),

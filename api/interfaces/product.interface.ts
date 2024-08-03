@@ -10,6 +10,7 @@ export interface IProduct extends IEntity {
   mainImagePath: string;
   description: string;
   trending: boolean;
+  outOfStock: boolean;
   category: ICategory;
   colors: IColor[];
   oldPrice?: number;

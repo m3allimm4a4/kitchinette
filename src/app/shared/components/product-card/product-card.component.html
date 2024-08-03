@@ -1,19 +1,26 @@
 <div class="single-product">
-  <div class="product-img">
+  <div class="product-img" [ngClass]="{ 'out-of-stock': product.outOfStock }">
     <a [routerLink]="['/product-details', product._id]" style="height: 200px">
       <img class="default-img" [ngSrc]="product.imagePath" [alt]="product.name" fill priority />
       <img class="hover-img" [ngSrc]="product.hoverImagePath" [alt]="product.name" fill />
       <!-- <span class="new">New</span> -->
     </a>
-    <div class="button-head">
-      <div class="product-action-2">
-        <a title="Add to cart" (click)="addToCart()">Add to cart</a>
+    @if (!product.outOfStock) {
+      <div class="button-head">
+        <div class="product-action-2">
+          <a title="Add to cart" (click)="addToCart()">Add to cart</a>
+        </div>
       </div>
-    </div>
+    }
   </div>
   <div class="product-content">
     <h3>
-      <a [routerLink]="['/product-details', product._id]">{{ product.name }}</a>
+      <a [routerLink]="['/product-details', product._id]"
+        >{{ product.name }}
+        @if (product.outOfStock) {
+          - Out Of Stock
+        }
+      </a>
     </h3>
     <div class="product-price">
       @if (product.oldPrice) {

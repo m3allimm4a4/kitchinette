@@ -10,6 +10,7 @@ export interface Product extends Entity {
   mainImagePath: string;
   description: string;
   trending: boolean;
+  outOfStock: boolean;
   category: Category;
   colors: Color[];
   oldPrice?: number;
@@ -24,6 +25,7 @@ export interface ProductCreate {
   cardImage: File;
   cardHoverImage: File;
   trending: boolean;
+  outOfStock: boolean;
   category: string;
   colors: string[];
 }

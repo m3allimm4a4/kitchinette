@@ -44,7 +44,13 @@
                         </div>
                       }
                       <p>
-                        <button class="btn animate" (click)="addToCart()">ADD TO CART</button>
+                        <button class="btn animate" [disabled]="product?.outOfStock" (click)="addToCart()">
+                          @if (product?.outOfStock) {
+                            OUT OF STOCK
+                          } @else {
+                            ADD TO CART
+                          }
+                        </button>
                       </p>
                     </div>
                   </div>
