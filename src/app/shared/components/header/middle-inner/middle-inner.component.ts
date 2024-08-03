@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderShoppingListComponent } from './header-shopping-list/header-shopping-list.component';
 import { InitializationService } from '../../../services/initialization/initialization.service';
 import { Category } from '../../../models/category.interface';
-import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../../../models/user.interface';
 import { AuthService } from '../../../../auth/auth.service';
@@ -24,7 +24,6 @@ import { ButtonModule } from 'primeng/button';
     RouterLink,
     RouterLinkActive,
     NgClass,
-    NgForOf,
     NgbCollapse,
     NgOptimizedImage,
     AvatarModule,
@@ -77,5 +76,6 @@ export class MiddleInnerComponent implements OnInit, OnDestroy {
 
   public logOut() {
     this.authService.logOut();
+    this.navbarCollapsed = true;
   }
 }

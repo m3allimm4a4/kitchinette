@@ -30,7 +30,10 @@
 
             <ul class="slicknav_nav" [ngbCollapse]="navbarCollapsed">
               <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a routerLink="/">Home</a>
+                <a routerLink="/" (click)="navbarCollapsed = true">Home</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/product-list" (click)="navbarCollapsed = true">Products</a>
               </li>
               <li routerLinkActive="active">
                 <a [routerLink]="[]" (click)="onCategoriesClick()">
@@ -39,20 +42,34 @@
                 </a>
                 <ul class="dropdown">
                   <div [ngbCollapse]="categoriesCollapsed">
-                    <li *ngFor="let item of categories">
-                      <a routerLink="/product-list" [queryParams]="{ category: item._id }">
-                        {{ item.name }}
-                      </a>
-                    </li>
+                    @for (item of categories; track item._id) {
+                      <li>
+                        <a
+                          routerLink="/product-list"
+                          [queryParams]="{ category: item._id }"
+                          (click)="navbarCollapsed = true">
+                          {{ item.name }}
+                        </a>
+                      </li>
+                    }
                   </div>
                 </ul>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/cart">View Cart</a>
+                <a routerLink="/cart" (click)="navbarCollapsed = true">View Cart</a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/contact-us">Contact Us</a>
+                <a routerLink="/contact-us" (click)="navbarCollapsed = true">Contact Us</a>
               </li>
+              @if (!user) {
+                <li routerLinkActive="active">
+                  <a routerLink="/login" (click)="navbarCollapsed = true">Login</a>
+                </li>
+              } @else {
+                <li>
+                  <a routerLink="/" (click)="logOut()">Log out</a>
+                </li>
+              }
             </ul>
           </div>
         </div>

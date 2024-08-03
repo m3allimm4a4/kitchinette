@@ -28,6 +28,7 @@
             <thead>
             <tr>
               <th scope='col'>Name</th>
+              <th scope='col'>Color</th>
               <th scope='col'>Quantity</th>
               <th scope='col'>Unit Price</th>
               <th scope='col'>Quantity</th>
@@ -37,6 +38,7 @@
             {{#each products}}
               <tr>
                 <td>{{this.product.name}}</td>
+                <td>{{this.color}}</td>
                 <td>{{this.quantity}}</td>
                 <td>{{this.product.price}}</td>
                 <td>{{this.quantity}}</td>
