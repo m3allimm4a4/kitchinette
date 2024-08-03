@@ -1,0 +1,20 @@
+.colors-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 25px;
+
+  > .color-picker {
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+    &.selected {
+      border: 2px solid black;
+    }
+
+    &:hover {
+      filter: brightness(85%);
+    }
+  }
+}

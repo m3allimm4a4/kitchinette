@@ -51,6 +51,7 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Color</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
                       </tr>
@@ -61,6 +62,7 @@
                           <tr>
                             <th scope="row">{{ $index + 1 }}</th>
                             <td>{{ item.product.name }}</td>
+                            <td>{{ item.color.name }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>{{ item.product.price * item.quantity }}</td>
                           </tr>

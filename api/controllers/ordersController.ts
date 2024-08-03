@@ -8,7 +8,7 @@ import { sendEmail } from '../shared/mail-sender';
 import { environment } from '../environments/environment';
 
 export const getOrders: RequestHandler = catchAsync(async (_req, res): Promise<void> => {
-  const orders = await Order.find().populate('user');
+  const orders = await Order.find().sort({ createdAt: -1 }).populate('user');
   res.status(200).json(orders.map(o => o.toObject()));
 });
 

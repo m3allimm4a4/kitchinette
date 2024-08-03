@@ -3,6 +3,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { CartItem } from '../shared/models/cart-item.interface';
 import { Product } from '../shared/models/product.interface';
+import { Color } from '../shared/models/color.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -45,13 +46,13 @@ export class CartService {
     }, 0);
   }
 
-  public addItem(product: Product): void {
+  public addItem(product: Product, color: Color): void {
     const cartItems = this.cartItems$.value;
-    const item = cartItems.find(p => p.product._id === product._id);
+    const item = cartItems.find(p => p.product._id === product._id && p.color._id === color._id);
     if (item) {
       item.quantity++;
     } else {
-      cartItems.push({ product: product, quantity: 1 });
+      cartItems.push({ product: product, color: color, quantity: 1 });
     }
     this.updateCart(cartItems);
   }

@@ -29,6 +29,20 @@
                       <p>
                         {{ product.description }}
                       </p>
+                      @if (product.colors) {
+                        <div>
+                          <div class="colors-container">
+                            <div>Color:</div>
+                            @for (color of product.colors; track color) {
+                              <div
+                                class="color-picker"
+                                [ngStyle]="{ backgroundColor: color.code }"
+                                [ngClass]="{ selected: selectedColor() === color }"
+                                (click)="selectedColor.set(color)"></div>
+                            }
+                          </div>
+                        </div>
+                      }
                       <p>
                         <button class="btn animate" (click)="addToCart()">ADD TO CART</button>
                       </p>

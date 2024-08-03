@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { Product } from '../shared/models/product.interface';
 import { CartService } from '../cart/cart.service';
 import { ProductDetailsService } from './product-details.service';
 import { BreadcrumbsComponent } from '../shared/components/breadcrumbs/breadcrumbs.component';
-import { DatePipe, NgIf, NgOptimizedImage } from '@angular/common';
+import { DatePipe, NgClass, NgOptimizedImage, NgStyle } from '@angular/common';
 import { ProductDetailsSidebarComponent } from './product-details-sidebar/product-details-sidebar.component';
 import { ProductDetailsSocialLinksComponent } from './product-details-social-links/product-details-social-links.component';
+import { Color } from '../shared/models/color.interface';
 
 @Component({
   selector: 'app-product-details',
@@ -20,11 +21,13 @@ import { ProductDetailsSocialLinksComponent } from './product-details-social-lin
     ProductDetailsSidebarComponent,
     ProductDetailsSocialLinksComponent,
     NgOptimizedImage,
-    NgIf,
+    NgStyle,
+    NgClass,
   ],
 })
 export class ProductDetailsComponent implements OnInit {
   public product: Product | undefined;
+  public selectedColor = signal<Color | undefined>(undefined);
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,11 +48,12 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe(product => {
         this.product = product;
+        this.selectedColor.set(product?.colors[0])
       });
   }
 
   public addToCart() {
-    if (!this.product) return;
-    this.cartService.addItem(this.product);
+    if (!this.product || !this.selectedColor()) return;
+    this.cartService.addItem(this.product, this.selectedColor() as Color);
   }
 }
