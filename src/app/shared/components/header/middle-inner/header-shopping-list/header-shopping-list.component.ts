@@ -4,6 +4,7 @@ import { CartItem } from '../../../../models/cart-item.interface';
 import { CartService } from '../../../../../cart/cart.service';
 import { RouterLink } from '@angular/router';
 import { NgForOf, NgOptimizedImage } from '@angular/common';
+import { AuthService } from '../../../../../auth/auth.service';
 
 @Component({
   selector: 'app-header-shopping-list',
@@ -17,10 +18,14 @@ export class HeaderShoppingListComponent implements OnInit, OnDestroy {
 
   public cartItems: CartItem[] = [];
   public totalAmount = 0;
+  public isUserLoggedIn = false;
 
   private subsciptions = new Subscription();
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.subsciptions.add(
@@ -33,6 +38,9 @@ export class HeaderShoppingListComponent implements OnInit, OnDestroy {
       this.cartService.getTotalAmount$().subscribe(total => {
         this.totalAmount = total;
       }),
+    );
+    this.subsciptions.add(
+      this.authService.isUserLoggedIn$().subscribe(isUserLoggedIn => (this.isUserLoggedIn = isUserLoggedIn)),
     );
   }
 

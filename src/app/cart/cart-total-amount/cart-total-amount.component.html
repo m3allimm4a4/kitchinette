@@ -19,7 +19,11 @@
           </li>
         </ul>
         <div class="button5">
-          <a routerLink="/checkout" class="btn">Checkout</a>
+          @if (isUserLoggedIn) {
+            <a routerLink="/checkout" class="btn">Checkout</a>
+          } @else {
+            <a routerLink="/login" class="btn">Checkout</a>
+          }
           <a routerLink="/product-list" class="btn">Continue shopping</a>
         </div>
       </div>

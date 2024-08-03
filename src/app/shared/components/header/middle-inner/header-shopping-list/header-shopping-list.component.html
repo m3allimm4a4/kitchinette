@@ -26,6 +26,10 @@
       <span>Total</span>
       <span class="total-amount">${{ totalAmount }}</span>
     </div>
-    <a routerLink="/checkout" class="btn animate">Checkout</a>
+    @if (isUserLoggedIn) {
+      <a routerLink="/checkout" class="btn animate">Checkout</a>
+    } @else {
+      <a routerLink="/login" class="btn animate">Checkout</a>
+    }
   </div>
 </div>

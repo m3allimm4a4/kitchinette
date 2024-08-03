@@ -32,6 +32,10 @@ export class AuthService {
     return !!this.accessToken$.value;
   }
 
+  public isUserLoggedIn$() {
+    return this.accessToken$.pipe(map(token => !!token));
+  }
+
   public isAdminUser$() {
     return this.user$.pipe(map(user => !!user && user.roles.includes(UserRole.ADMIN)));
   }
