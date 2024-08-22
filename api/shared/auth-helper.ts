@@ -1,8 +1,8 @@
 import { sign } from 'jsonwebtoken';
-import { compare, hash } from 'bcrypt';
 import { IUser } from '../interfaces/user.interface';
 import { environment } from '../environments/environment';
 import { randomUUID } from 'crypto';
+import { hash, compare } from 'bcryptjs';
 
 export const generateAuthToken = (user: IUser) => {
   return sign(user, environment.jwtSecret, { expiresIn: environment.jwtExpiry });
