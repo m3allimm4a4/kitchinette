@@ -8,9 +8,7 @@ import { AdminDashboardProductsDetailsComponent } from './admin-dashboard-produc
 import { AdminDashboardProductsComponent } from './admin-dashboard-products/admin-dashboard-products.component';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { AdminDashboardColorsComponent } from './admin-dashboard-colors/admin-dashboard-colors.component';
-import {
-  AdminDashboardColorsDetailsComponent
-} from './admin-dashboard-colors/admin-dashboard-colors-details/admin-dashboard-colors-details.component';
+import { AdminDashboardColorsDetailsComponent } from './admin-dashboard-colors/admin-dashboard-colors-details/admin-dashboard-colors-details.component';
 
 export const ADMIN_DASHBOARD_ROUTES: Routes = [
   {

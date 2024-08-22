@@ -96,17 +96,17 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
     const cardHoverImage = req.files['cardHoverImage'] as UploadedFile;
 
     if (mainImage) {
-      await deleteImageFile(getImageName(product.imagePath))
+      await deleteImageFile(getImageName(product.imagePath));
       mainImageName = await saveUploadedFile(mainImage);
       product.imagePath = mainImageName;
     }
     if (cardImage) {
-      await deleteImageFile(getImageName(product.mainImagePath))
+      await deleteImageFile(getImageName(product.mainImagePath));
       cardImageName = await saveUploadedFile(cardImage);
       product.mainImagePath = cardImageName;
     }
     if (cardHoverImage) {
-      await deleteImageFile(getImageName(product.hoverImagePath))
+      await deleteImageFile(getImageName(product.hoverImagePath));
       cardHoverImageName = await saveUploadedFile(cardHoverImage);
       product.hoverImagePath = cardHoverImageName;
     }
@@ -124,7 +124,7 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
     res.status(200).json(oldProduct);
   } catch (error) {
     if (mainImageName) {
-      await deleteImageFile(mainImageName)
+      await deleteImageFile(mainImageName);
     }
     if (cardImageName) {
       await deleteImageFile(cardImageName);

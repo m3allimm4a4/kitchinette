@@ -1,4 +1,4 @@
-<section class='shop checkout section' style="color: black">
+<section class='shop checkout section' style='color: black'>
   <div class='col-lg-8 col-12'>
     <div class='checkout-form'>
       <h2>Order #{{_id}}</h2>
@@ -26,24 +26,24 @@
           <p>Items</p>
           <table class='table table-striped'>
             <thead>
-            <tr>
-              <th scope='col'>Name</th>
-              <th scope='col'>Color</th>
-              <th scope='col'>Quantity</th>
-              <th scope='col'>Unit Price</th>
-              <th scope='col'>Quantity</th>
-            </tr>
+              <tr>
+                <th scope='col'>Name</th>
+                <th scope='col'>Color</th>
+                <th scope='col'>Quantity</th>
+                <th scope='col'>Unit Price</th>
+                <th scope='col'>Quantity</th>
+              </tr>
             </thead>
             <tbody>
-            {{#each products}}
-              <tr>
-                <td>{{this.product.name}}</td>
-                <td>{{this.color}}</td>
-                <td>{{this.quantity}}</td>
-                <td>{{this.product.price}}</td>
-                <td>{{this.quantity}}</td>
-              </tr>
-            {{/each}}
+              {{#each products}}
+                <tr>
+                  <td>{{this.product.name}}</td>
+                  <td>{{this.color}}</td>
+                  <td>{{this.quantity}}</td>
+                  <td>{{this.product.price}}</td>
+                  <td>{{this.quantity}}</td>
+                </tr>
+              {{/each}}
             </tbody>
           </table>
         </div>

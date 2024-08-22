@@ -48,7 +48,7 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe(product => {
         this.product = product;
-        this.selectedColor.set(product?.colors[0])
+        this.selectedColor.set(product?.colors[0]);
       });
   }
 

@@ -8,10 +8,9 @@ describe('AdminDashboardColorsDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminDashboardColorsDetailsComponent]
-    })
-    .compileComponents();
-    
+      imports: [AdminDashboardColorsDetailsComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AdminDashboardColorsDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
