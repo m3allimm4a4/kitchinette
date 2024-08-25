@@ -1,5 +1,6 @@
+import path from 'node:path';
+import objectStorageClient from '../clients/object-storage.client';
 import { RequestHandler } from 'express';
-import { deleteImageFile, getImageName, saveUploadedFile } from '../shared/helpers';
 import { UploadedFile } from 'express-fileupload';
 import { Banner } from '../models/banner.model';
 import { NotFoundError } from '../errors/not-found.error';
@@ -26,24 +27,22 @@ export const updateBanner: RequestHandler = catchAsync(async (req, res): Promise
   if (Object.keys(req.files).length < 1) throw new Error('Some images are missing');
 
   const banner = await Banner.findById(id);
-  if (!banner) throw new Error('Banner not found');
-
-  await deleteImageFile(getImageName(banner.path));
+  if (!banner) {
+    throw new NotFoundError();
+  }
 
   const image = req.files['imageFile'] as UploadedFile;
-  const imageName = await saveUploadedFile(image);
-  try {
-    const newBanner = await Banner.findByIdAndUpdate(id, {
-      title: req.body.title,
-      subtitle: req.body.subtitle,
-      link: req.body.link,
-      path: imageName,
-    });
-    res.status(200).json(newBanner);
-  } catch (error) {
-    await deleteImageFile(imageName);
-    throw error;
-  }
+  const imagePath = `banners/${banner._id}${path.extname(image.name)}`;
+
+  banner.title = req.body.title;
+  banner.subtitle = req.body.subtitle;
+  banner.link = req.body.link;
+  banner.path = imagePath;
+  await banner.save();
+
+  await objectStorageClient.putObject(image.data, imagePath);
+
+  res.status(200).json(banner);
 });
 
 export const createBanner: RequestHandler = catchAsync(async (req, res): Promise<void> => {

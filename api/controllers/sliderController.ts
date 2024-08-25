@@ -2,9 +2,10 @@ import { RequestHandler } from 'express';
 import { catchAsync } from '../shared/catchAsync';
 import { Slider } from '../models/slider.model';
 import { InvalidIdError } from '../errors/invalid-id.error';
-import { deleteImageFile, getImageName, saveUploadedFile } from '../shared/helpers';
 import { NotFoundError } from '../errors/not-found.error';
 import { UploadedFile } from 'express-fileupload';
+import path from 'node:path';
+import objectStorageClient from '../clients/object-storage.client';
 
 export const getSlider: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const sliders = await Slider.find();
@@ -18,21 +19,20 @@ export const updateSlider: RequestHandler = catchAsync(async (req, res): Promise
   if (Object.keys(req.files).length < 1) throw new Error('Some images are missing');
 
   const slider = await Slider.findById(id);
-  if (!slider) throw new NotFoundError();
-
-  await deleteImageFile(getImageName(slider.path));
+  if (!slider) {
+    throw new NotFoundError();
+  }
 
   const image = req.files['imageFile'] as UploadedFile;
-  const imageName = await saveUploadedFile(image);
-  try {
-    slider.title = req.body.title;
-    slider.subtitle = req.body.subtitle;
-    slider.description = req.body.description;
-    slider.path = imageName;
-    const newSlider = await slider.save();
-    res.status(200).json(newSlider);
-  } catch (error) {
-    await deleteImageFile(imageName);
-    throw error;
-  }
+  const imagePath = `sliders/${slider._id}${path.extname(image.name)}`;
+
+  slider.title = req.body.title;
+  slider.subtitle = req.body.subtitle;
+  slider.description = req.body.description;
+  slider.path = imagePath;
+  await slider.save();
+
+  await objectStorageClient.putObject(image.data, imagePath);
+
+  res.status(200).json(slider);
 });

@@ -8,3 +8,7 @@ export const jwtExpiry = 86400000;
 export const bcryptSaltRounds = 10;
 export const senderEmail = 'kitchinette.lb@hotmail.com';
 export const brevoApiKey = '';
+export const objectStorageEndpoint = 'https://fra1.digitaloceanspaces.com';
+export const objectStorageBucket = 'kitchinette-object-storage';
+export const objectStorageKeyId = 'DO00L63N4Y4W6NJJKTED';
+export const objectStorageSecret = '5FkoHMHNaH5VYUtv75QtxhYtz6Ac5SnM54YcSREr5Jg';
