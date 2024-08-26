@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4000/api',
+  apiUrl: 'https://kitchinette-back-icle7.ondigitalocean.app/api',
   imagesUrl: 'https://kitchinette-object-storage.fra1.digitaloceanspaces.com',
 };
