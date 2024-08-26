@@ -82,9 +82,9 @@ export const createProduct: RequestHandler = catchAsync(async (req, res): Promis
   newProduct.hoverImagePath = cardHoverImagePath;
 
   await Promise.all([
-    putObject(mainImage.data, mainImagePath),
-    putObject(cardImage.data, cardImagePath),
-    putObject(cardHoverImage.data, cardHoverImagePath),
+    putObject(mainImage.data, mainImagePath, 'public-read'),
+    putObject(cardImage.data, cardImagePath, 'public-read'),
+    putObject(cardHoverImage.data, cardHoverImagePath, 'public-read'),
   ]);
 
   await newProduct.save();
@@ -115,17 +115,17 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
 
     if (mainImage) {
       const mainImagePath = `products/${product._id}-main${path.extname(mainImage.name)}`;
-      await putObject(mainImage.data, mainImagePath);
+      await putObject(mainImage.data, mainImagePath, 'public-read');
       product.imagePath = mainImagePath;
     }
     if (cardImage) {
       const cardImagePath = `products/${product._id}-card${path.extname(mainImage.name)}`;
-      await putObject(cardImage.data, cardImagePath);
+      await putObject(cardImage.data, cardImagePath, 'public-read');
       product.mainImagePath = cardImagePath;
     }
     if (cardHoverImage) {
       const cardHoverImagePath = `products/${product._id}-card-hover${path.extname(mainImage.name)}`;
-      await putObject(cardImage.data, cardHoverImagePath);
+      await putObject(cardImage.data, cardHoverImagePath, 'public-read');
       product.hoverImagePath = cardHoverImagePath;
     }
     product = await product.save();

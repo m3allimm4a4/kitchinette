@@ -1,11 +1,11 @@
 import path from 'node:path';
-import objectStorageClient from '../clients/object-storage.client';
 import { RequestHandler } from 'express';
 import { UploadedFile } from 'express-fileupload';
 import { Banner } from '../models/banner.model';
 import { NotFoundError } from '../errors/not-found.error';
 import { catchAsync } from '../shared/catchAsync';
 import { InvalidIdError } from '../errors/invalid-id.error';
+import { putObject } from '../clients/object-storage.client';
 
 export const getBanners: RequestHandler = catchAsync(async (_req, res): Promise<void> => {
   const banners = await Banner.find();
@@ -40,7 +40,7 @@ export const updateBanner: RequestHandler = catchAsync(async (req, res): Promise
   banner.path = imagePath;
   await banner.save();
 
-  await objectStorageClient.putObject(image.data, imagePath);
+  await putObject(image.data, imagePath, 'public-read');
 
   res.status(200).json(banner);
 });

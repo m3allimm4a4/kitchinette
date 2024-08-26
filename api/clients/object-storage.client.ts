@@ -1,4 +1,4 @@
-import { DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, ObjectCannedACL, PutObjectCommand } from '@aws-sdk/client-s3';
 import { environment } from '../environments/environment';
 import { s3Client } from './s3.client';
 
@@ -10,13 +10,12 @@ export const deleteObject = (fileName: string) => {
   return s3Client.send(command);
 };
 
-export const putObject = (data: Buffer, fileName: string) => {
+export const putObject = (data: Buffer, fileName: string, acl: ObjectCannedACL) => {
   const command = new PutObjectCommand({
     Bucket: environment.objectStorageBucket,
     Body: data,
     Key: fileName,
+    ACL: acl,
   });
   return s3Client.send(command);
 };
-
-export default { deleteObject, putObject };

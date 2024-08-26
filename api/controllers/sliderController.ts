@@ -5,7 +5,7 @@ import { InvalidIdError } from '../errors/invalid-id.error';
 import { NotFoundError } from '../errors/not-found.error';
 import { UploadedFile } from 'express-fileupload';
 import path from 'node:path';
-import objectStorageClient from '../clients/object-storage.client';
+import { putObject } from '../clients/object-storage.client';
 
 export const getSlider: RequestHandler = catchAsync(async (req, res): Promise<void> => {
   const sliders = await Slider.find();
@@ -32,7 +32,7 @@ export const updateSlider: RequestHandler = catchAsync(async (req, res): Promise
   slider.path = imagePath;
   await slider.save();
 
-  await objectStorageClient.putObject(image.data, imagePath);
+  await putObject(image.data, imagePath, 'public-read');
 
   res.status(200).json(slider);
 });
