@@ -6,6 +6,6 @@ import { UserRole } from '../interfaces/user.interface';
 const router = Router();
 
 router.route('/').get(getSlider);
-router.route('/:id').get(auth([UserRole.ADMIN]), updateSlider);
+router.route('/:id').put(auth([UserRole.ADMIN]), updateSlider);
 
 export const sliderRoutes = router;

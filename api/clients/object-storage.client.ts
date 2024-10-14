@@ -4,7 +4,7 @@ import { s3Client } from './s3.client';
 
 export const deleteObject = (fileName: string) => {
   const command = new DeleteObjectCommand({
-    Bucket: environment.objectStorageEndpoint,
+    Bucket: environment.objectStorageBucket,
     Key: fileName,
   });
   return s3Client.send(command);

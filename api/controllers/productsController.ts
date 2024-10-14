@@ -23,7 +23,7 @@ export const getProducts: RequestHandler = catchAsync(async (req, res): Promise<
   }
 
   const products = await query.populate('category').populate('colors');
-  res.status(200).json(products);
+  res.status(200).json(products.map(o => o.toObject()));
 });
 
 export const getProduct: RequestHandler = catchAsync(async (req, res): Promise<void> => {
