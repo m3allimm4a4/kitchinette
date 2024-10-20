@@ -5,10 +5,11 @@ import { Product } from '../shared/models/product.interface';
 import { CartService } from '../cart/cart.service';
 import { ProductDetailsService } from './product-details.service';
 import { BreadcrumbsComponent } from '../shared/components/breadcrumbs/breadcrumbs.component';
-import { DatePipe, NgClass, NgOptimizedImage, NgStyle } from '@angular/common';
+import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { ProductDetailsSidebarComponent } from './product-details-sidebar/product-details-sidebar.component';
 import { ProductDetailsSocialLinksComponent } from './product-details-social-links/product-details-social-links.component';
 import { Color } from '../shared/models/color.interface';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -20,12 +21,13 @@ import { Color } from '../shared/models/color.interface';
     DatePipe,
     ProductDetailsSidebarComponent,
     ProductDetailsSocialLinksComponent,
-    NgOptimizedImage,
     NgStyle,
     NgClass,
   ],
 })
 export class ProductDetailsComponent implements OnInit {
+  protected readonly imagesUrl = environment.imagesUrl + '/';
+
   public product: Product | undefined;
   public selectedColor = signal<Color | undefined>(undefined);
 

@@ -1,9 +1,8 @@
 <div class="single-product">
   <div class="product-img" [ngClass]="{ 'out-of-stock': product.outOfStock }">
     <a [routerLink]="['/product-details', product._id]" style="height: 200px">
-      <img class="default-img" [ngSrc]="product.imagePath" [alt]="product.name" fill priority />
-      <img class="hover-img" [ngSrc]="product.hoverImagePath" [alt]="product.name" fill />
-      <!-- <span class="new">New</span> -->
+      <img class="default-img" [src]="imagesUrl + product.imagePath" [alt]="product.name" />
+      <img class="hover-img" [src]="imagesUrl + product.hoverImagePath" [alt]="product.name" />
     </a>
     @if (!product.outOfStock) {
       <div class="button-head">

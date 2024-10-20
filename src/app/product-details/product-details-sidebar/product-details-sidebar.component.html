@@ -18,7 +18,7 @@
     @for (product of newProducts; track product._id) {
       <div class="single-post" style="display: flex">
         <div class="image" style="width: 100px">
-          <img [ngSrc]="product.imagePath" [alt]="product.name" fill />
+          <img [src]="imagesUrl + product.imagePath" [alt]="product.name" />
         </div>
         <div class="content">
           <h5>
