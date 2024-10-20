@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withInMemoryScrolling, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -12,7 +12,11 @@ import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
+    ),
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([HttpUrlInterceptor, HttpAuthInterceptor])),
     provideImgixLoader(environment.imagesUrl),

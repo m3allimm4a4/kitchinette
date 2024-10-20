@@ -1,5 +1,6 @@
 @if (area === 'user') {
-  <app-header></app-header>
+  <app-header />
 }
-<router-outlet (activate)="onActivate($event)"></router-outlet>
-<app-footer></app-footer>
+<router-outlet (activate)="onActivate($event)" />
+<app-footer />
+<p-scrollTop [style]="{ 'border-radius': '50%', 'background-color': '#f6931d' }" />
