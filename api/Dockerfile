@@ -16,6 +16,6 @@ FROM base as final
 COPY --from=publish /publish/* /app
 RUN npm install -g pnpm
 RUN pnpm install --prod
-EXPOSE 80
+EXPOSE 8080
 EXPOSE 443
 ENTRYPOINT ["node","index.js"]
