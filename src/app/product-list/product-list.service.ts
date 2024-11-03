@@ -25,10 +25,10 @@ export class ProductListService {
   }
 
   public sortProductList(productList: Product[], sortBy: SortBy): Product[] {
-    const products = [...productList];
+    let products = [...productList];
     switch (sortBy) {
       case SortBy.name:
-        products.sort((a, b) => {
+        products = products.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
           }
@@ -39,15 +39,7 @@ export class ProductListService {
         });
         break;
       case SortBy.price:
-        products.sort((a, b) => {
-          if (a.price < b.price) {
-            return -1;
-          }
-          if (a.price > b.price) {
-            return 1;
-          }
-          return 0;
-        });
+        products = products.sort((a, b) => a.price - b.price);
         break;
     }
     return products;

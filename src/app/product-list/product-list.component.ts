@@ -52,14 +52,16 @@ export class ProductListComponent implements OnInit {
       )
       .subscribe(data => {
         this.productList = this.productListService.sortProductList(data, this.sortBy);
-        this.pageNumbers = this.getPageNumbers(data);
+        this.pageNumbers = this.getPageNumbers(this.productList);
         this.productListPage = this.productListService.paginateProductList(this.productList, 0, this.pageSize);
       });
   }
 
   public onSortChange(sortBy: SortBy): void {
     this.sortBy = sortBy;
+    this.currentPage = 0;
     this.productList = this.productListService.sortProductList(this.productList, sortBy);
+    this.productListPage = this.productListService.paginateProductList(this.productList, 0, this.pageSize);
   }
 
   public onPageChange(pageNumber: number) {
