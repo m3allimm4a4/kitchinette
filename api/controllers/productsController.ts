@@ -115,16 +115,22 @@ export const updateProduct: RequestHandler = catchAsync(async (req, res): Promis
 
     if (mainImage) {
       const mainImagePath = `products/${product._id}-main${path.extname(mainImage.name)}`;
+      const oldMainImagePath = product.imagePath;
+      await deleteObject(oldMainImagePath);
       await putObject(mainImage.data, mainImagePath, 'public-read');
       product.imagePath = mainImagePath;
     }
     if (cardImage) {
       const cardImagePath = `products/${product._id}-card${path.extname(mainImage.name)}`;
+      const oldCardImagePath = product.mainImagePath;
+      await deleteObject(oldCardImagePath);
       await putObject(cardImage.data, cardImagePath, 'public-read');
       product.mainImagePath = cardImagePath;
     }
     if (cardHoverImage) {
       const cardHoverImagePath = `products/${product._id}-card-hover${path.extname(mainImage.name)}`;
+      const oldHoverImagePath = product.hoverImagePath;
+      await deleteObject(oldHoverImagePath);
       await putObject(cardImage.data, cardHoverImagePath, 'public-read');
       product.hoverImagePath = cardHoverImagePath;
     }
