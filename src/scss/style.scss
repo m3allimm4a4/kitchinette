@@ -1231,6 +1231,8 @@ Version:1.0
   font-weight: 700;
   color: #f6931d;
   margin-bottom: 20px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 .hero-slider .hero-text h1 span {
   font-size: 20px;
@@ -1239,10 +1241,14 @@ Version:1.0
   color: #333;
   font-weight: 700;
   line-height: initial;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 .hero-slider .hero-text p {
   color: #333;
   margin-bottom: 35px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 .hero-slider .hero-text .button {
   margin: 0;
