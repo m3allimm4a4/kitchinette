@@ -34,7 +34,7 @@ export class TrendingItemsComponent implements OnInit {
       numScroll: 3,
     },
     {
-      breakpoint: '1100px',
+      breakpoint: '768px',
       numVisible: 2,
       numScroll: 2,
     },

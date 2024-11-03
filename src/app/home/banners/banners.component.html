@@ -1,17 +1,27 @@
 <section class="small-banner section">
   <div class="container-fluid">
     <div class="row">
-      @for (banner of banners; track banner._id) {
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="single-banner" style="height: 230px">
-            <img [src]="imagesUrl + banner.path" [alt]="banner.title" />
-            <div class="content">
-              <p>{{ banner.title }}</p>
-              <h3>{{ banner.subtitle }}</h3>
-              <a [routerLink]="banner.link">Shop Now</a>
+      @defer (on viewport) {
+        <p-carousel
+          [value]="banners"
+          [numVisible]="3"
+          [numScroll]="3"
+          [autoplayInterval]="5000"
+          [circular]="true"
+          [responsiveOptions]="responsiveOptions">
+          <ng-template pTemplate="item" let-banner>
+            <div class="single-banner" style="height: 230px">
+              <img [src]="imagesUrl + banner.path" [alt]="banner.title" />
+              <div class="content">
+                <p>{{ banner.title }}</p>
+                <h3>{{ banner.subtitle }}</h3>
+                <a [routerLink]="banner.link">Shop Now</a>
+              </div>
             </div>
-          </div>
-        </div>
+          </ng-template>
+        </p-carousel>
+      } @placeholder (minimum 0) {
+        <div></div>
       }
     </div>
   </div>
