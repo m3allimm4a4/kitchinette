@@ -66,6 +66,7 @@ export class ProductListComponent implements OnInit {
     if (this.currentPage !== pageNumber && pageNumber >= 0 && pageNumber < this.pageNumber) {
       this.currentPage = pageNumber;
       this.productListPage = this.productListService.paginateProductList(this.productList, pageNumber, this.pageSize);
+      window.scroll(0, 0);
     }
   }
 
