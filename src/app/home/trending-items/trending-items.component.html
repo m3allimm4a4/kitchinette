@@ -11,32 +11,43 @@
     <div class="row">
       <div class="col-12">
         <div class="product-info">
-          <div class="nav-main">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              @for (category of categories; track category._id) {
-                <li class="nav-item">
-                  <a
-                    routerLink="/"
-                    class="nav-link"
-                    [ngClass]="{ active: activeCategory._id === category._id }"
-                    (click)="switchCategory(category)"
-                    >{{ category.name }}</a
-                  >
-                </li>
-              }
-            </ul>
-          </div>
+          <!--          <div class="nav-main">-->
+          <!--            <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+          <!--              @for (category of categories; track category._id) {-->
+          <!--                <li class="nav-item">-->
+          <!--                  <a-->
+          <!--                    routerLink="/"-->
+          <!--                    class="nav-link"-->
+          <!--                    [ngClass]="{ active: activeCategory._id === category._id }"-->
+          <!--                    (click)="switchCategory(category)"-->
+          <!--                    >{{ category.name }}</a-->
+          <!--                  >-->
+          <!--                </li>-->
+          <!--              }-->
+          <!--            </ul>-->
+          <!--          </div>-->
 
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane" [ngClass]="{ show: showTab, active: showTab, fade: !showTab }">
               <div class="tab-single">
-                <div class="row">
-                  @for (product of filteredTrendingItems; track product._id) {
-                    <div class="col-xl-3 col-lg-4 col-md-4 col-6">
-                      <app-product-card [product]="product"></app-product-card>
-                    </div>
-                  }
-                </div>
+                <!--                <div class="row">-->
+                <!--                  @for (product of trendingItems; track product._id) {-->
+                <!--                    <div class="col-xl-3 col-lg-4 col-md-4 col-6">-->
+                <!--                      <app-product-card [product]="product"></app-product-card>-->
+                <!--                    </div>-->
+                <!--                  }-->
+                <!--                </div>-->
+                <p-carousel
+                  [value]="trendingItems"
+                  [numVisible]="4"
+                  [numScroll]="4"
+                  [circular]="true"
+                  [autoplayInterval]="3000"
+                  [responsiveOptions]="responsiveOptions">
+                  <ng-template pTemplate="item" let-product>
+                    <app-product-card [product]="product"></app-product-card>
+                  </ng-template>
+                </p-carousel>
               </div>
             </div>
           </div>
