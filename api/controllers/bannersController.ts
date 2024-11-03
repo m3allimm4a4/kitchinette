@@ -5,7 +5,7 @@ import { Banner } from '../models/banner.model';
 import { NotFoundError } from '../errors/not-found.error';
 import { catchAsync } from '../shared/catchAsync';
 import { InvalidIdError } from '../errors/invalid-id.error';
-import { putObject } from '../clients/object-storage.client';
+import { deleteObject, putObject } from '../clients/object-storage.client';
 
 export const getBanners: RequestHandler = catchAsync(async (_req, res): Promise<void> => {
   const banners = await Banner.find();
@@ -33,6 +33,7 @@ export const updateBanner: RequestHandler = catchAsync(async (req, res): Promise
 
   const image = req.files['imageFile'] as UploadedFile;
   const imagePath = `banners/${banner._id}${path.extname(image.name)}`;
+  const oldImagePath = banner.path;
 
   banner.title = req.body.title;
   banner.subtitle = req.body.subtitle;
@@ -40,6 +41,7 @@ export const updateBanner: RequestHandler = catchAsync(async (req, res): Promise
   banner.path = imagePath;
   await banner.save();
 
+  await deleteObject(oldImagePath);
   await putObject(image.data, imagePath, 'public-read');
 
   res.status(200).json(banner);
