@@ -11,7 +11,7 @@
               @if (isLoading) {
                 spinner
               } @else if (verified) {
-                Email verified. You can now <a routerLink="/login" class="login-url">Log In</a>
+                Email verified. You can now <a routerLink="/login" class="login-url" [replaceUrl]="true">Log In</a>
               } @else {
                 Error verifying email.
               }

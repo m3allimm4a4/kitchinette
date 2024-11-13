@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { UserRole } from '../../../api/interfaces/user.interface';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +18,6 @@ export class AuthComponent {
 
   constructor(
     private router: Router,
-    private location: Location,
     private authService: AuthService,
   ) {}
 
@@ -29,7 +27,7 @@ export class AuthComponent {
         if (user.roles.includes(UserRole.ADMIN)) {
           this.router.navigate(['/admin-dashboard']).then();
         } else {
-          this.location.back();
+          this.router.navigate(['/']).then();
         }
       },
       error: () => {
