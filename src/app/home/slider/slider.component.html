@@ -1,7 +1,8 @@
 <section class="hero-slider">
   @for (item of sliderItems; track item._id) {
-    <div class="single-slider" style="position: relative">
-      <img [ngSrc]="item.path" style="object-fit: cover" alt="slider image" fill priority />
+    <div
+      class="single-slider"
+      [ngStyle]="{ 'background-image': 'url(\'' + imagesUrl + item.path + '\')' }">
       <div class="container" style="position: relative; z-index: 1">
         <div class="row no-gutters">
           <div class="col-lg-9 col-12">
