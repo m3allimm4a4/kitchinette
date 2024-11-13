@@ -46,7 +46,7 @@ export const signUp: RequestHandler = catchAsync(async (req, res): Promise<void>
   });
   const params = {
     name: user.firstName,
-    verificationUrl: verificationHash,
+    verificationUrl: `https://kitchinette.com/email-verification/${verificationHash}`,
   };
   res.render('email-verification', params, async (err, html) => {
     if (err) {
