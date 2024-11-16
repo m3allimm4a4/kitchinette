@@ -3,19 +3,20 @@ import { Subscription } from 'rxjs';
 import { CartItem } from '../../../../models/cart-item.interface';
 import { CartService } from '../../../../../cart/cart.service';
 import { RouterLink } from '@angular/router';
-import { NgForOf, NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../../../../auth/auth.service';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-header-shopping-list',
   templateUrl: './header-shopping-list.component.html',
   styleUrls: ['./header-shopping-list.component.scss'],
   standalone: true,
-  imports: [RouterLink, NgForOf, NgOptimizedImage],
+  imports: [RouterLink],
 })
 export class HeaderShoppingListComponent implements OnInit, OnDestroy {
   @Output() cartItemsCountChange = new EventEmitter<number>();
 
+  public baseUrl = environment.imagesUrl + '/';
   public cartItems: CartItem[] = [];
   public totalAmount = 0;
   public isUserLoggedIn = false;

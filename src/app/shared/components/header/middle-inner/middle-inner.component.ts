@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderShoppingListComponent } from './header-shopping-list/header-shopping-list.component';
 import { InitializationService } from '../../../services/initialization/initialization.service';
 import { Category } from '../../../models/category.interface';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../../../models/user.interface';
 import { AuthService } from '../../../../auth/auth.service';
@@ -25,7 +25,6 @@ import { ButtonModule } from 'primeng/button';
     RouterLinkActive,
     NgClass,
     NgbCollapse,
-    NgOptimizedImage,
     AvatarModule,
     OverlayPanelModule,
     ButtonModule,
