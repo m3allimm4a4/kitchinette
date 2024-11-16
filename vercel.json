@@ -4,5 +4,5 @@
   "installCommand": "pnpm install",
   "outputDirectory": "dist",
   "framework": null,
-  "devCommand": "node /kitchinette/server/server.mjs"
+  "devCommand": "node dist/kitchinette/server/server.mjs"
 }
