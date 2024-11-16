@@ -6,7 +6,7 @@
   "framework": null,
   "builds": [
     {
-      "src": "dist/kitchinette/server/main.js",
+      "src": "dist/kitchinette/server/server.mjs",
       "use": "@vercel/node"
     },
     {
@@ -17,7 +17,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/kitchinette/server/main.js"
+      "dest": "dist/kitchinette/server/server.mjs"
     }
   ]
 }
