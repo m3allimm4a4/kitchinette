@@ -1,0 +1,38 @@
+.mobile-search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 30%;
+  right: 50%;
+  border: 1px solid #ececec;
+  border-radius: 5px;
+  width: fit-content;
+
+  input {
+    padding: 0 25px;
+    height: 48px;
+    background: transparent;
+    color: #666;
+    border-radius: 0;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  button {
+    height: 48px;
+    width: 48px;
+    border-radius: 0 5px 5px 0;
+    font-size: 18px;
+    border: none;
+    color: #fff;
+    background: #333333;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #fff;
+      background: #f6931d;
+    }
+  }
+}
