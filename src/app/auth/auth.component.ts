@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { UserRole } from '../../../api/interfaces/user.interface';
+import { UserRole } from '../shared/models/user.interface';
 
 @Component({
   selector: 'app-auth',
