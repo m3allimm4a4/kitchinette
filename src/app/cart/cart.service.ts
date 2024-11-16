@@ -35,17 +35,19 @@ export class CartService {
   public getTotalAmount$(): Observable<number> {
     return this.cartItems$.pipe(
       map(cartItems => {
-        return cartItems.reduce((sum, currentCartItem) => {
+        const total = cartItems.reduce((sum, currentCartItem) => {
           return sum + currentCartItem.quantity * currentCartItem.product.price;
         }, 0);
+        return +total.toFixed(2);
       }),
     );
   }
 
   public getTotalAmount(): number {
-    return this.cartItems$.value.reduce((sum, currentCartItem) => {
+    const total = this.cartItems$.value.reduce((sum, currentCartItem) => {
       return sum + currentCartItem.quantity * currentCartItem.product.price;
     }, 0);
+    return +total.toFixed(2);
   }
 
   public addItem(product: Product, color: Color): void {
