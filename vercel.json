@@ -1,8 +1,19 @@
 {
-  "buildCommand": "npm run build",
-  "devCommand": "node dist/kitchinette/server/server.mjs",
-  "framework": null,
-  "installCommand": "pnpm install",
-  "outputDirectory": "dist/kitchinette",
-  "ignore": ["api/**"]
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/kitchinette/server/main.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/kitchinette/browser/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/kitchinette/server/main.js"
+    }
+  ]
 }
