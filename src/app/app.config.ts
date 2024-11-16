@@ -9,6 +9,7 @@ import { provideImgixLoader } from '@angular/common';
 import { environment } from '../environments/environment';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([HttpUrlInterceptor, HttpAuthInterceptor])),
     provideImgixLoader(environment.imagesUrl),
     provideAnimations(),
+    MessageService,
   ],
 };

@@ -3,11 +3,20 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, HeaderComponent, FooterComponent, ScrollTopModule],
+  imports: [
+    RouterOutlet,
+    FooterComponent,
+    HeaderComponent,
+    HeaderComponent,
+    FooterComponent,
+    ScrollTopModule,
+    ToastModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

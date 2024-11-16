@@ -4,15 +4,17 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { CartItem } from '../shared/models/cart-item.interface';
 import { Product } from '../shared/models/product.interface';
 import { Color } from '../shared/models/color.interface';
+import { MessageService } from 'primeng/api';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly cartKey = 'cart';
   private cartItems$ = new BehaviorSubject<CartItem[]>([]);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private messageService: MessageService,
+  ) {
     if (isPlatformBrowser(this.platformId)) {
       const json = localStorage.getItem(this.cartKey);
       if (json) {
@@ -55,6 +57,13 @@ export class CartService {
       cartItems.push({ product: product, color: color, quantity: 1 });
     }
     this.updateCart(cartItems);
+    this.messageService.add({
+      key: 'toast',
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Item Added To Cart',
+      life: 100000,
+    });
   }
 
   public changeQuantity(quantity: number, index: number): void {
