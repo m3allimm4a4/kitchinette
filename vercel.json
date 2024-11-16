@@ -4,20 +4,5 @@
   "installCommand": "pnpm install",
   "outputDirectory": "dist",
   "framework": null,
-  "builds": [
-    {
-      "src": "dist/kitchinette/server/server.mjs",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/kitchinette/browser/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/kitchinette/server/server.mjs"
-    }
-  ]
+  "devCommand": "node /dist/kitchinette/server/server.mjs"
 }
