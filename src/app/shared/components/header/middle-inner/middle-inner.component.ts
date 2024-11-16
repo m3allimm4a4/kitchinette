@@ -10,8 +10,9 @@ import { User } from '../../../models/user.interface';
 import { AuthService } from '../../../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { AvatarModule } from 'primeng/avatar';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-middle-inner',
@@ -26,8 +27,8 @@ import { ButtonModule } from 'primeng/button';
     NgClass,
     NgbCollapse,
     AvatarModule,
-    OverlayPanelModule,
     ButtonModule,
+    MenuModule,
   ],
 })
 export class MiddleInnerComponent implements OnInit, OnDestroy {
@@ -38,6 +39,7 @@ export class MiddleInnerComponent implements OnInit, OnDestroy {
   public navbarCollapsed = true;
   public categoriesCollapsed = true;
   public categoriesAngle = 'pi-angle-down';
+  public menuItems: MenuItem[] = [{ label: 'Sign Out', command: () => this.logOut() }];
 
   private subscription = new Subscription();
 

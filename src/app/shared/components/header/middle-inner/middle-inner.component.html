@@ -93,13 +93,10 @@
               <p-avatar
                 styleClass="mr-2"
                 shape="circle"
-                (click)="userOverlay.toggle($event)"
+                [style]="{ cursor: 'pointer' }"
+                (click)="menu.toggle($event)"
                 [label]="(user.firstName[0] + user.lastName[0]).toUpperCase()" />
-              <p-overlayPanel #userOverlay appendTo="body">
-                <div>
-                  <p-button label="sign out" severity="warning" (onClick)="logOut()"></p-button>
-                </div>
-              </p-overlayPanel>
+              <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body" />
             } @else {
               <a routerLink="/login" class="single-icon">
                 <i class="pi pi-user"></i>
