@@ -3,5 +3,6 @@
   "devCommand": "node dist/kitchinette/server/server.mjs",
   "framework": null,
   "installCommand": "pnpm install",
-  "outputDirectory": "dist/kitchinette"
+  "outputDirectory": "dist/kitchinette",
+  "ignore": ["api/**"]
 }
