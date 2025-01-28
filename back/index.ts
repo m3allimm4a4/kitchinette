@@ -18,7 +18,7 @@ import { validationRoutes } from './routes/validationRoutes';
 import { contactUsRoutes } from './routes/contectUsRoutes';
 import { colorsRoutes } from './routes/colorsRoutes';
 
-const run = async (): Promise<void> => {
+export const app = async () => {
   const server = express();
 
   await mongoose.connect(environment.databaseUrl);
@@ -56,6 +56,11 @@ const run = async (): Promise<void> => {
   });
 
   server.use(errorHandler);
+  return server;
+};
+
+const run = async () => {
+  const server = await app();
 
   server.listen(environment.port, () => {
     if (!environment.production) {
@@ -64,6 +69,4 @@ const run = async (): Promise<void> => {
   });
 };
 
-run()
-  .then()
-  .catch(error => console.error(error));
+// run().then();
