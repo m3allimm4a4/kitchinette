@@ -9,7 +9,9 @@
     "test": "ng test",
     "serve:ssr:kitchinette": "node dist/kitchinette/server/server.mjs",
     "format": "prettier --cache --write .",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "vercel:build": "npm run build && cd ./back && npm run build && cd ..",
+    "vercel:install": "pnpm install && cd ./back && pnpm install"
   },
   "private": true,
   "dependencies": {
